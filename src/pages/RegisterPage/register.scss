@@ -51,12 +51,7 @@
   }
 }
 
-.info {
-  top: -30px;
-  left: 10px;
-  color: #bdb8b8;
-  font-size: 12px;
-}
+
 
 .user_box {
   .input {
@@ -71,6 +66,13 @@
         @extend .info;
       }
     }
+  }
+
+  .info {
+    top: -30px;
+    left: 10px;
+    color: #bdb8b8;
+    font-size: 12px;
   }
 
   label {

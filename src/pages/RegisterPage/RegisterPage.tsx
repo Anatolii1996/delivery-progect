@@ -1,6 +1,7 @@
 import { useState, FC } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { FormValues, ErrorValues } from "./types";
+import cn from "classnames";
 import "./register.scss";
 
 const RegisterPage: FC = () => {
@@ -103,10 +104,25 @@ const RegisterPage: FC = () => {
     }));
   };
 
+  const infoClasses = {
+    name: cn({
+      info: formState.name,
+    }),
+    email: cn({
+      info: formState.email,
+    }),
+    password: cn({
+      info: formState.password,
+    }),
+    tel: cn({
+      info: formState.tel,
+    }),
+  };
+
   return (
     <div className="register_wrap">
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <p className="title">Register </p>
+        <p className="title">Реєстрація</p>
 
         <div className="user_box">
           <input
@@ -117,7 +133,7 @@ const RegisterPage: FC = () => {
             value={formState.name}
             onChange={handleFormChange}
           />
-          <label>*Ім'я</label>
+          <label className={infoClasses.name} >*Ім'я</label>
           <p>{errors.name?.message}</p>
         </div>
 
@@ -130,7 +146,7 @@ const RegisterPage: FC = () => {
             value={formState.email}
             onChange={handleFormChange}
           />
-          <label>*Email</label>
+          <label className={infoClasses.email} >*Email</label>
           <p>{errors.email?.message}</p>
         </div>
         <div className="user_box">
@@ -142,7 +158,7 @@ const RegisterPage: FC = () => {
             value={formState.password}
             onChange={handleFormChange}
           />
-          <label>*Пароль</label>
+          <label className={infoClasses.password} >*Пароль</label>
           <p>{errors.password?.message}</p>
         </div>
 
@@ -156,11 +172,11 @@ const RegisterPage: FC = () => {
             value={formState.tel}
             onChange={handleFormChange}
           />
-          <label>*Номер телефону </label>
+          <label className={infoClasses.tel} >*Номер телефону </label>
           <p>{errors.tel?.message}</p>
         </div>
 
-        <button className="submit">Submit</button>
+        <button className="submit">Зареєструватись</button>
 
         <a href="#">Забули пароль?</a>
       </form>
