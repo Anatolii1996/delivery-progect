@@ -1,0 +1,35 @@
+.login_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  svg {
+    position: relative;
+    &:nth-child(1) {
+      transform: rotate(-45deg);
+      animation: fromLeft 0.8s linear 0.5s 1 normal forwards;
+    }
+    &:nth-child(2) {
+      transform: rotate(225deg);
+      top: -15px;
+      animation: fromRight 0.8s linear 0.5s 1 normal forwards;
+    }
+  }
+}
+
+@keyframes fromLeft {
+  0% {
+    left: -500px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes fromRight {
+    0% {
+      left: 500px;
+    }
+    100% {
+      left: 0;
+    }
+  }
