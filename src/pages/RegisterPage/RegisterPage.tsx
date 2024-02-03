@@ -18,10 +18,12 @@ const RegisterPage: FC = () => {
       errors.name = {
         type: "required",
         message: "* Це поле обов'язкове",
-        maxLength: {
-          value: 50,
-          message: "* Максимальна довжина 50 символів",
-        },
+      };
+    }
+
+    if (values.name.length > 50) {
+      errors.name = {
+        message: "* Максимальна довжина 50 символів",
       };
     }
 
@@ -29,10 +31,11 @@ const RegisterPage: FC = () => {
       errors.email = {
         type: "required",
         message: "* Це поле обов'язкове",
-        maxLength: {
-          value: 20,
-          message: "* Максимальная длина 20 символов",
-        },
+      };
+    }
+    if (values.email.length > 30) {
+      errors.email = {
+        message: "* Максимальна довжина 30 символів",
       };
     }
 
@@ -40,10 +43,12 @@ const RegisterPage: FC = () => {
       errors.password = {
         type: "required",
         message: "* Це поле обов'язкове",
-        maxLength: {
-          value: 1000,
-          message: "* Максимальная длина 1000 символов",
-        },
+      };
+    }
+
+    if (values.password.length < 8) {
+      errors.password = {
+        message: "*Мінімальна довжина 8 символів",
       };
     }
 
@@ -51,10 +56,18 @@ const RegisterPage: FC = () => {
       errors.tel = {
         type: "required",
         message: "* Це поле обов'язкове",
-        maxLength: {
-          value: 1000,
-          message: "* Максимальная длина 1000 символов",
-        },
+      };
+    }
+
+    if (values.tel.length < 10) {
+      errors.tel = {
+        message: "*Мінімальна довжина 10 символів",
+      };
+    }
+
+    if (values.tel.length > 20) {
+      errors.tel = {
+        message: "*Максимальна довжина 20 символів",
       };
     }
 
@@ -81,7 +94,7 @@ const RegisterPage: FC = () => {
     });
   };
 
-  const handleFormChange = <T extends HTMLInputElement >(
+  const handleFormChange = <T extends HTMLInputElement>(
     e: React.ChangeEvent<T>
   ) => {
     setFormState((prev) => ({
@@ -89,7 +102,6 @@ const RegisterPage: FC = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
 
   return (
     <div className="register_wrap">
