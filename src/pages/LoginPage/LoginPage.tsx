@@ -36,7 +36,7 @@ const LoginPage: FC = () => {
           <button>Увійти як гість</button>
         </div>
         <div className="btn-conteiner">
-          <a className="btn-content" href="#">
+          <a className="btn-content" href="/register">
             <span className="btn-title">Зареєструватися</span>
             <span className="icon-arrow">
               <svg
