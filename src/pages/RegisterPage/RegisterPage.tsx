@@ -10,6 +10,7 @@ const RegisterPage: FC = () => {
     email: "",
     password: "",
     tel: "",
+    address: "",
   });
 
   const resolver: Resolver<FormValues> = async (values) => {
@@ -47,7 +48,7 @@ const RegisterPage: FC = () => {
       };
     }
 
-    if (values.password.length < 8) {
+    if (values.password.length < 8 && values.password.length > 0) {
       errors.password = {
         message: "*Мінімальна довжина 8 символів",
       };
@@ -60,7 +61,7 @@ const RegisterPage: FC = () => {
       };
     }
 
-    if (values.tel.length < 10) {
+    if (values.tel.length < 10 && values.tel.length > 0) {
       errors.tel = {
         message: "*Мінімальна довжина 10 символів",
       };
@@ -69,6 +70,19 @@ const RegisterPage: FC = () => {
     if (values.tel.length > 20) {
       errors.tel = {
         message: "*Максимальна довжина 20 символів",
+      };
+    }
+
+    if (!values.address) {
+      errors.address = {
+        type: "required",
+        message: "* Це поле обов'язкове",
+      };
+    }
+
+    if (values.address.length > 100) {
+      errors.address = {
+        message: "*Максимальна довжина 100 символів",
       };
     }
 
@@ -92,6 +106,7 @@ const RegisterPage: FC = () => {
       email: "",
       password: "",
       tel: "",
+      address: "",
     });
   };
 
@@ -117,6 +132,9 @@ const RegisterPage: FC = () => {
     tel: cn({
       info: formState.tel,
     }),
+    address: cn({
+      info: formState.address,
+    }),
   };
 
   return (
@@ -133,7 +151,7 @@ const RegisterPage: FC = () => {
             value={formState.name}
             onChange={handleFormChange}
           />
-          <label className={infoClasses.name} >*Ім'я</label>
+          <label className={infoClasses.name}>*Ім'я</label>
           <p>{errors.name?.message}</p>
         </div>
 
@@ -146,7 +164,7 @@ const RegisterPage: FC = () => {
             value={formState.email}
             onChange={handleFormChange}
           />
-          <label className={infoClasses.email} >*Email</label>
+          <label className={infoClasses.email}>*Email</label>
           <p>{errors.email?.message}</p>
         </div>
         <div className="user_box">
@@ -158,7 +176,7 @@ const RegisterPage: FC = () => {
             value={formState.password}
             onChange={handleFormChange}
           />
-          <label className={infoClasses.password} >*Пароль</label>
+          <label className={infoClasses.password}>*Пароль</label>
           <p>{errors.password?.message}</p>
         </div>
 
@@ -166,14 +184,25 @@ const RegisterPage: FC = () => {
           <input
             type="tel"
             autoComplete="off"
-            placeholder=""
             className="input"
             {...register("tel")}
             value={formState.tel}
             onChange={handleFormChange}
           />
-          <label className={infoClasses.tel} >*Номер телефону </label>
+          <label className={infoClasses.tel}>*Номер телефону </label>
           <p>{errors.tel?.message}</p>
+        </div>
+        <div className="user_box">
+          <input
+            type="text"
+            autoComplete="off"
+            className="input"
+            {...register("address")}
+            value={formState.address}
+            onChange={handleFormChange}
+          />
+          <label className={infoClasses.address}>*Адреса для доставки </label>
+          <p>{errors.address?.message}</p>
         </div>
 
         <button className="submit">Зареєструватись</button>

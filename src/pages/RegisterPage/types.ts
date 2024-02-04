@@ -4,6 +4,7 @@ export interface FormValues {
   email: string;
   password: string;
   tel: string;
+  address: string;
 }
 
 export interface ErrorValues {
@@ -20,6 +21,10 @@ export interface ErrorValues {
     message: string;
   };
   tel: {
+    type?: string;
+    message: string;
+  };
+  address: {
     type?: string;
     message: string;
   };
