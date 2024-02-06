@@ -1,6 +1,8 @@
 import { useState, FC } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
+import { useAppDispatch } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
+import { createUser } from "../../redux/userSlice";
 import cn from "classnames";
 import "./register.scss";
 
@@ -12,6 +14,8 @@ const RegisterPage: FC = () => {
     tel: "",
     address: "",
   });
+
+  const dispatch = useAppDispatch();
 
   const resolver: Resolver<FormValues> = async (values) => {
     const errors: Partial<ErrorValues> = {};
@@ -100,6 +104,7 @@ const RegisterPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // Здесь вы можете выполнить действия с данными формы
+    dispatch(createUser(data));
 
     setFormState({
       name: "",

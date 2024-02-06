@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { all, call } from "@redux-saga/core/effects";
-import firstLoadingSaga from "./firstLoadingSaga";
+import userSaga from "./userSaga";
 
-const sagasList = [firstLoadingSaga];
+const sagasList = [userSaga];
 
 export default function* rootSaga() {
   yield all(sagasList.map((saga) => call(saga)));
