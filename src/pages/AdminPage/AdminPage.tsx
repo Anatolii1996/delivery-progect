@@ -1,12 +1,13 @@
 import { useState } from "react";
+import moment from "moment";
 import "./adminPage.scss";
 
 const AdminPage = () => {
-// const [toDay]=
+  const [toDay] = useState(moment().format('DD.MM.YY'));
 
   return (
     <div className="admin_wrap">
-      <h2>Будь-ласка оберіть меню на сьогодні!</h2>
+      <h2>Будь-ласка оберіть меню на {toDay}!</h2>
       <fieldset className="first_menu">
         <legend>Меню 1 </legend>
 
