@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch } from "../../hooks";
 import moment from "moment";
+import { getDishes } from "../../redux/dishesSlice";
 import "./adminPage.scss";
 
 const AdminPage = () => {
-  const [toDay] = useState(moment().format('DD.MM.YY'));
+  const [toDay] = useState(moment().format("DD.MM.YY"));
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getDishes());
+  }, []);
 
   return (
     <div className="admin_wrap">
