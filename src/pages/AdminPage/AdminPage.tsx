@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import moment from "moment";
 import { getDishes } from "../../redux/dishesSlice";
 import "./adminPage.scss";
 
 const AdminPage = () => {
   const [toDay] = useState(moment().format("DD.MM.YY"));
+
+  const firstDishes = useAppSelector((state) => state.menu.dishes.firstDishes);
 
   const dispatch = useAppDispatch();
 
@@ -24,11 +26,12 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="firstDish">Перша страва:</label>
               <select name="firstDish" id="firstDish">
-                <option value="value1">Значение 1</option>
-                <option value="value2">
-                  Значение 1ddddddddddddddddddddddddddddddddddddddddd
-                </option>
-                <option value="value3">Значение 3</option>
+                {firstDishes.map((dish) =>{
+                  return(
+                    <option key={dish} value={dish}>{dish}</option>
+                  )
+                })}
+                
               </select>
             </div>
           </li>

@@ -1,6 +1,5 @@
 import { takeEvery, put } from "redux-saga/effects";
-import { createUserSuccess, createUserFailure } from "../redux/userSlice";
-import { IUserAction } from "./types";
+import { getFirstDishes } from "../redux/dishesSlice"; 
 import axios from "axios";
 
 function* getFirstDishesWorker(): any {
@@ -8,7 +7,8 @@ function* getFirstDishesWorker(): any {
 
   try {
      const payload = yield axios.get<string[]>(`${import.meta.env.VITE_SERVER_URL}/first-dishes`);
-     console.log(payload.data)
+    //  console.log(payload.data)
+    yield put(getFirstDishes(payload.data))
   } catch (error) {
    
   }
