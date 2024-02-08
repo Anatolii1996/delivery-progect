@@ -3,9 +3,9 @@ import { createUserSuccess, createUserFailure } from "../redux/userSlice";
 import { IUserAction } from "./types";
 import axios from "axios";
 
-function* createuserWorker(action:IUserAction): any {
+function* createuserWorker(action: IUserAction): any {
   console.log("createuserWorker started");
-  console.log(action.payload)
+  // console.log(action.payload)
 
   try {
     const config = {
@@ -16,12 +16,17 @@ function* createuserWorker(action:IUserAction): any {
       },
       data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
     };
-    yield axios(config).catch((error) => {
-      console.log(error);
-    });
+    const response = yield axios(config);
+    // console.log(response)
 
-    // Если успешно, диспатчим экшн createUserSuccess
-    yield put(createUserSuccess());
+    if (response.status === 201) {
+      // Если успешно, диспатчим экшн createUserSuccess
+      yield put(createUserSuccess());
+    } else {
+      // Если сервер не отвечает успешно, диспатчим экшн createUserFailure
+      yield put(createUserFailure(`Server responded with status: ${response.status}`));
+    }
+
   } catch (error) {
     // В случае ошибки, диспатчим экшн createUserFailure
     yield put(createUserFailure(error));
