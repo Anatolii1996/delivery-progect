@@ -27,6 +27,10 @@ const dishesSlice = createSlice({
       state.dishes.sideDishes = action.payload;
     },
 
+    getSalads: (state, action) => {
+      state.dishes.salads = action.payload;
+    },
+
     // createUserFailure: (state, action) => {
     //   // Этот экшн вызывается в саге в случае ошибки при отправке данных на бекенд
     //   state.message = "Нажаль замовлення не відправлено";
@@ -40,5 +44,5 @@ export const getDishes = createAction(GET_DISHES, () => ({
   payload: undefined,
 }));
 
-export const { getFirstDishes, getSecondDishes, getSideDishes } = dishesSlice.actions;
+export const { getFirstDishes, getSecondDishes, getSideDishes, getSalads } = dishesSlice.actions;
 export default dishesSlice.reducer;

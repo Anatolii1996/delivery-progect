@@ -12,6 +12,7 @@ const AdminPage = () => {
     (state) => state.menu.dishes.secondDishes
   );
   const sideDishes = useAppSelector((state) => state.menu.dishes.sideDishes);
+  const salads = useAppSelector((state) => state.menu.dishes.salads);
 
   const dispatch = useAppDispatch();
 
@@ -88,9 +89,13 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="salad">Салат:</label>
               <select name="salad" id="salad">
-                <option value="value1">Значение 1</option>
-                <option value="value2">Значение 2</option>
-                <option value="value3">Значение 3</option>
+                {salads ? (
+                  salads.map((salad) => {
+                    return <option value={salad}>{salad}</option>;
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>
