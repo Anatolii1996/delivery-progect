@@ -3,12 +3,13 @@ import {
   getFirstDishes,
   getSecondDishes,
   getSideDishes,
-  getSalads
+  getSalads,
+  getDesserts
 } from "../redux/dishesSlice";
 import axios from "axios";
 
 function* getFirstDishesWorker(): any {
-  console.log("getFirstDishesWorker started");
+  // console.log("getFirstDishesWorker started");
 
   try {
     const payload = yield axios.get<string[]>(
@@ -22,7 +23,7 @@ function* getFirstDishesWorker(): any {
 }
 
 function* getSecondDishesWorker(): any {
-  console.log("getSecondDishesWorker started");
+  // console.log("getSecondDishesWorker started");
 
   try {
     const payload = yield axios.get<string[]>(
@@ -36,7 +37,7 @@ function* getSecondDishesWorker(): any {
 }
 
 function* getSideDishesWorker(): any {
-  console.log("getSideDishesWorker started");
+  // console.log("getSideDishesWorker started");
 
   try {
     const payload = yield axios.get<string[]>(
@@ -50,7 +51,7 @@ function* getSideDishesWorker(): any {
 }
 
 function* getSaladsWorker(): any {
-  console.log("getSaladsWorker started");
+  // console.log("getSaladsWorker started");
 
   try {
     const payload = yield axios.get<string[]>(
@@ -63,14 +64,29 @@ function* getSaladsWorker(): any {
   }
 }
 
+function* getDesertsWorker(): any {
+  // console.log("getDesertsWorker started");
+
+  try {
+    const payload = yield axios.get<string[]>(
+      `${import.meta.env.VITE_SERVER_URL}/desserts`
+    );
+    //  console.log(payload.data)
+    yield put(getDesserts(payload.data));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export default function* dishesSaga() {
-  console.log("dishesSaga started");
+  // console.log("dishesSaga started");
   yield takeEvery("dishesSlice/getDishes", function* () {
     yield all([
       call(getFirstDishesWorker),
       call(getSecondDishesWorker),
       call(getSideDishesWorker),
       call(getSaladsWorker),
+      call(getDesertsWorker),
     ]);
   });
 }

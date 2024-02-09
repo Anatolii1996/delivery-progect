@@ -13,6 +13,7 @@ const AdminPage = () => {
   );
   const sideDishes = useAppSelector((state) => state.menu.dishes.sideDishes);
   const salads = useAppSelector((state) => state.menu.dishes.salads);
+  const desserts = useAppSelector((state) => state.menu.dishes.desserts);
 
   const dispatch = useAppDispatch();
 
@@ -91,7 +92,11 @@ const AdminPage = () => {
               <select name="salad" id="salad">
                 {salads ? (
                   salads.map((salad) => {
-                    return <option value={salad}>{salad}</option>;
+                    return (
+                      <option key={salad} value={salad}>
+                        {salad}
+                      </option>
+                    );
                   })
                 ) : (
                   <option>Не вдалося отримати страви</option>
@@ -114,11 +119,17 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="firstDish">Основна страва:</label>
               <select name="firstDish" id="firstDish">
-                <option value="value1">Значение 1</option>
-                <option value="value2">
-                  Значение 1ddddddddddddddddddddddddddddddddddddddddd
-                </option>
-                <option value="value3">Значение 3</option>
+                {secondDishes ? (
+                  secondDishes.map((dish) => {
+                    return (
+                      <option key={dish} value={dish}>
+                        {dish}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>
@@ -127,9 +138,17 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="dessert">Десерт:</label>
               <select name="dessert" id="dessert">
-                <option value="value1">Значение 1</option>
-                <option value="value2">Значение 2</option>
-                <option value="value3">Значение 3</option>
+                {desserts ? (
+                  desserts.map((dessert) => {
+                    return (
+                      <option key={dessert} value={dessert}>
+                        {dessert}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>
@@ -140,11 +159,17 @@ const AdminPage = () => {
         <legend>Десерт </legend>
 
         <select name="firstDish" id="firstDish">
-          <option value="value1">Значение 1</option>
-          <option value="value2">
-            Значение 1ddddddddddddddddddddddddddddddddddddddddd
-          </option>
-          <option value="value3">Значение 3</option>
+          {desserts ? (
+            desserts.map((dessert) => {
+              return (
+                <option key={dessert} value={dessert}>
+                  {dessert}
+                </option>
+              );
+            })
+          ) : (
+            <option>Не вдалося отримати страви</option>
+          )}
         </select>
       </fieldset>
     </div>
