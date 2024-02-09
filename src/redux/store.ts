@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
+
 import userReducer from "./userSlice";
 import dishesReducer from "./dishesSlice";
+import dalyMenuReducer from "./menuSlice";
 
 import rootSaga from "../sagas";
 
@@ -11,6 +13,7 @@ const store = configureStore({
   reducer: {
     createUser: userReducer,
     menu: dishesReducer,
+    dalyMenu: dalyMenuReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
