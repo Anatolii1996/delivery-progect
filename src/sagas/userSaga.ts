@@ -3,9 +3,9 @@ import { createUserSuccess, createUserFailure } from "../redux/userSlice";
 import { IUserAction } from "./types";
 import axios from "axios";
 
-function* createuserWorker(action: IUserAction): any {
-  console.log("createuserWorker started");
-  // console.log(action.payload)
+function* createuserWorker(action:IUserAction): any {
+  // console.log("createuserWorker started");
+  console.log(action.payload)
 
   try {
     const config = {
@@ -34,7 +34,7 @@ function* createuserWorker(action: IUserAction): any {
 }
 
 export default function* userSaga() {
-  console.log("userSaga started");
+  // console.log("userSaga started");
   // console.log(import.meta.env.VITE_SERVER_URL);
 
   yield takeEvery("user/createUser", createuserWorker);

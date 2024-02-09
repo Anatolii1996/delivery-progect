@@ -1,0 +1,25 @@
+h2,
+legend {
+  text-align: center;
+}
+legend {
+  font-weight: 700;
+}
+fieldset {
+  padding-left: 2rem;
+  width: 90%;
+  margin: auto;
+  ol {
+    padding-bottom: 0.5rem;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+}
+.dessert {
+  select {
+    width: 90%;
+    margin-bottom: 0.5rem;
+  }
+}
