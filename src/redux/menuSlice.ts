@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IDalyMenu } from "./types";
 
 const initialState: IDalyMenu = {
-  menu1: {
+   menu1: {
     firstDish: "",
     secondDish: "",
     sideDish: "",
@@ -15,6 +15,9 @@ const initialState: IDalyMenu = {
   },
   dessert: "",
   date: "",
+  _id:""
+
+ 
 };
 
 const menuSlice = createSlice({
@@ -22,7 +25,8 @@ const menuSlice = createSlice({
   initialState,
   reducers: {
     getDalyMenu: (state, action) => {
-      // Этот экшн вызывается из компонента для начала процесса создания пользователя
+      // console.log(action.payload)
+      return { ...state, ...action.payload };
     },
     // createUserSuccess: (state) => {
     //   // Этот экшн вызывается в саге при успешной отправке данных на бекенд
@@ -36,6 +40,5 @@ const menuSlice = createSlice({
   },
 });
 
-export const { getDalyMenu } =
-menuSlice.actions;
+export const { getDalyMenu } = menuSlice.actions;
 export default menuSlice.reducer;
