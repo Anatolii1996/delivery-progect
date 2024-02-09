@@ -5,7 +5,8 @@ import { getDishes } from "../../redux/dishesSlice";
 import "./adminPage.scss";
 
 const AdminPage = () => {
-  const [toDay] = useState(moment().format("DD.MM.YY"));
+  const [toDay] = useState(moment().format("DD.MM.YYYY"));
+  // console.log(toDay)
 
   const firstDishes = useAppSelector((state) => state.menu.dishes.firstDishes);
   const secondDishes = useAppSelector(
@@ -14,6 +15,7 @@ const AdminPage = () => {
   const sideDishes = useAppSelector((state) => state.menu.dishes.sideDishes);
   const salads = useAppSelector((state) => state.menu.dishes.salads);
   const desserts = useAppSelector((state) => state.menu.dishes.desserts);
+  const dalyMenuDate = useAppSelector((state) => state.dalyMenu.date);
 
   const dispatch = useAppDispatch();
 
@@ -24,7 +26,8 @@ const AdminPage = () => {
   return (
     <div className="admin_wrap">
       <h2>Будь-ласка оберіть меню на {toDay}!</h2>
-      <fieldset className="first_menu">
+      <form >
+         <fieldset className="first_menu">
         <legend>Меню 1 </legend>
 
         <ol>
@@ -172,6 +175,9 @@ const AdminPage = () => {
           )}
         </select>
       </fieldset>
+      <button className="submit">Відправити</button>
+      </form>
+     
     </div>
   );
 };
