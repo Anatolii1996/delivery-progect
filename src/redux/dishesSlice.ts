@@ -5,6 +5,7 @@ const initialState: IMenu = {
   dishes: {
     firstDishes: [],
     secondDishes: [],
+    sideDishes: [],
     salads: [],
     desserts: [],
   },
@@ -16,6 +17,14 @@ const dishesSlice = createSlice({
   reducers: {
     getFirstDishes: (state, action) => {
       state.dishes.firstDishes = action.payload;
+    },
+
+    getSecondDishes: (state, action) => {
+      state.dishes.secondDishes = action.payload;
+    },
+
+    getSideDishes: (state, action) => {
+      state.dishes.sideDishes = action.payload;
     },
 
     // createUserFailure: (state, action) => {
@@ -31,5 +40,5 @@ export const getDishes = createAction(GET_DISHES, () => ({
   payload: undefined,
 }));
 
-export const { getFirstDishes } = dishesSlice.actions;
+export const { getFirstDishes, getSecondDishes, getSideDishes } = dishesSlice.actions;
 export default dishesSlice.reducer;

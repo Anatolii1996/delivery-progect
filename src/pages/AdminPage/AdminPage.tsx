@@ -8,6 +8,10 @@ const AdminPage = () => {
   const [toDay] = useState(moment().format("DD.MM.YY"));
 
   const firstDishes = useAppSelector((state) => state.menu.dishes.firstDishes);
+  const secondDishes = useAppSelector(
+    (state) => state.menu.dishes.secondDishes
+  );
+  const sideDishes = useAppSelector((state) => state.menu.dishes.sideDishes);
 
   const dispatch = useAppDispatch();
 
@@ -26,12 +30,17 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="firstDish">Перша страва:</label>
               <select name="firstDish" id="firstDish">
-                {firstDishes.map((dish) =>{
-                  return(
-                    <option key={dish} value={dish}>{dish}</option>
-                  )
-                })}
-                
+                {firstDishes ? (
+                  firstDishes.map((dish) => {
+                    return (
+                      <option key={dish} value={dish}>
+                        {dish}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>
@@ -40,9 +49,17 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="secondDish">Друга страва:</label>
               <select name="secondDish" id="secondDish">
-                <option value="value1">Значение 1</option>
-                <option value="value2">Значение 2</option>
-                <option value="value3">Значение 3</option>
+                {secondDishes ? (
+                  secondDishes.map((dish) => {
+                    return (
+                      <option key={dish} value={dish}>
+                        {dish}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>
@@ -51,9 +68,18 @@ const AdminPage = () => {
             <div className="order_box">
               <label htmlFor="sideDish">Гарнір:</label>
               <select name="sideDish" id="sideDish">
-                <option value="value1">Значение 1</option>
-                <option value="value2">Значение 2</option>
-                <option value="value3">Значение 3</option>
+                <option value=""></option>
+                {sideDishes ? (
+                  sideDishes.map((dish) => {
+                    return (
+                      <option key={dish} value={dish}>
+                        {dish}
+                      </option>
+                    );
+                  })
+                ) : (
+                  <option>Не вдалося отримати страви</option>
+                )}
               </select>
             </div>
           </li>

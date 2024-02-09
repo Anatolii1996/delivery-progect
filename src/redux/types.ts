@@ -5,6 +5,7 @@ export interface IMenu {
   dishes: {
     firstDishes:string[],
     secondDishes:string[],
+    sideDishes:string[],
     salads:string[],
     desserts:string[],
   },
