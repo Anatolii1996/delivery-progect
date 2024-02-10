@@ -39,9 +39,9 @@ const RegisterPage: FC = () => {
         message: "* Це поле обов'язкове",
       };
     }
-    if (values.email.length > 30) {
+    if (values.email.length > 50) {
       errors.email = {
-        message: "* Максимальна довжина 30 символів",
+        message: "* Максимальна довжина 50 символів",
       };
     }
 
