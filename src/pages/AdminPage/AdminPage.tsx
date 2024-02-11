@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import moment from "moment";
 import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
+import { changeDalyMenu } from "../../redux/menuSlice";
 import "./adminPage.scss";
 
 const AdminPage: FC = () => {
@@ -40,8 +41,9 @@ const AdminPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // Здесь вы можете выполнить действия с данными формы
-    // dispatch(createUser(data));
     console.log(data);
+    dispatch(changeDalyMenu(data));
+    
   };
 
   return (

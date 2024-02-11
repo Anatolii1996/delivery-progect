@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IDalyMenu } from "./types";
+import moment from "moment";
 
 const initialState: IDalyMenu = {
-   menu1: {
+  menu1: {
     firstDish: "",
     secondDish: "",
     sideDish: "",
@@ -15,9 +16,7 @@ const initialState: IDalyMenu = {
   },
   dessert: "",
   date: "",
-  _id:""
-
- 
+  _id: "",
 };
 
 const menuSlice = createSlice({
@@ -27,6 +26,17 @@ const menuSlice = createSlice({
     getDalyMenu: (state, action) => {
       // console.log(action.payload)
       return { ...state, ...action.payload };
+    },
+
+    changeDalyMenu: (state, action) => {
+      state.dessert = action.payload.bigDessert;
+      state.menu1.firstDish = action.payload.firstDish;
+      state.menu1.secondDish = action.payload.secondDish;
+      state.menu1.sideDish = action.payload.sideDish;
+      state.menu1.salad = action.payload.salad;
+      state.menu2.mainDish = action.payload.mainDish;
+      state.menu2.dessert = action.payload.dessert;
+      state.date = moment().format("DD.MM.YYYY");
     },
     // createUserSuccess: (state) => {
     //   // Этот экшн вызывается в саге при успешной отправке данных на бекенд
@@ -40,5 +50,5 @@ const menuSlice = createSlice({
   },
 });
 
-export const { getDalyMenu } = menuSlice.actions;
+export const { getDalyMenu, changeDalyMenu } = menuSlice.actions;
 export default menuSlice.reducer;

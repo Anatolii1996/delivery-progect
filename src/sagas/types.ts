@@ -10,3 +10,18 @@ export interface IUserState {
   tel: string;
   address: string;
 }
+
+export interface IDalyAction {
+  type: string;
+  payload: IDalyForm;
+}
+
+export interface IDalyForm {
+  bigDessert: string;
+  dessert: string;
+  firstDish: string;
+  mainDish: string;
+  salad: string;
+  secondDish: string;
+  sideDish: string;
+}
