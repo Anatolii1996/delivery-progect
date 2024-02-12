@@ -20,16 +20,23 @@ function* getMenuWorker(): any {
 
 function* changeMenuWorker(action:IDalyAction): any {
   console.log("changeMenuWorker started");
-console.log(action.payload)
-  // try {
-  //   const payload = yield axios.get<IDalyMenu[]>(
-  //     `${import.meta.env.VITE_SERVER_URL}/menu`
-  //   );
-  //   //  console.log(payload.data)
+// console.log(action.payload)
+  try {
+    const config = {
+      method: "patch",
+      url: `${import.meta.env.VITE_SERVER_URL}/change-dalyMenu`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
+    };
+    yield axios(config);
+
+    //   //  console.log(payload.data)
   //   yield put(getDalyMenu(payload.data[0]));
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
