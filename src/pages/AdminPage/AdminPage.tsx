@@ -2,6 +2,7 @@ import { useState, useEffect, FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import moment from "moment";
+import cn from "classnames";
 import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
 import { changeDalyMenu } from "../../redux/menuSlice";
@@ -9,7 +10,8 @@ import "./adminPage.scss";
 
 const AdminPage: FC = () => {
   const [toDay] = useState(moment().format("DD.MM.YYYY"));
-  // console.log(toDay)
+  const dalyMenuDate = useAppSelector((state) => state.dalyMenu.date);
+  const [isToday, setIsToday] = useState(false);
 
   const firstDishes = useAppSelector((state) => state.menu.dishes.firstDishes);
   const secondDishes = useAppSelector(
@@ -18,13 +20,23 @@ const AdminPage: FC = () => {
   const sideDishes = useAppSelector((state) => state.menu.dishes.sideDishes);
   const salads = useAppSelector((state) => state.menu.dishes.salads);
   const desserts = useAppSelector((state) => state.menu.dishes.desserts);
-  const dalyMenuDate = useAppSelector((state) => state.dalyMenu.date);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getDishes());
   }, []);
+
+  useEffect(() => {
+    if (dalyMenuDate) {
+      // console.log(toDay);
+      // console.log(dalyMenuDate);
+      if (toDay === dalyMenuDate) {
+        setIsToday(true);
+      }
+      // console.log(toDay === dalyMenuDate);
+    }
+  }, [toDay, dalyMenuDate]);
 
   const { register, handleSubmit, setValue } = useForm<FormValues>({});
 
@@ -43,7 +55,6 @@ const AdminPage: FC = () => {
     // Здесь вы можете выполнить действия с данными формы
     console.log(data);
     dispatch(changeDalyMenu(data));
-    
   };
 
   return (
@@ -199,7 +210,9 @@ const AdminPage: FC = () => {
             )}
           </select>
         </fieldset>
-        <button className="submit">Відправити</button>
+        <button className="submit" disabled={isToday ? true : false}>
+          Відправити
+        </button>
       </form>
     </div>
   );

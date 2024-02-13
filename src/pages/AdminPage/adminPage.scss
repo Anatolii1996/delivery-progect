@@ -25,6 +25,20 @@
       &:hover {
         background-color: rgb(56, 90, 194);
       }
+      &:disabled{
+        color: #ccc; /* Цвет текста для отключенной кнопки */
+        cursor: not-allowed; 
+        &:hover{
+          &::after{
+          content: "На сьогодні меню сформовано";
+          color: red;
+          position: absolute;
+          top:350px;
+          left: 650px;
+        }
+        }
+        
+      }
     }
   }
   fieldset {
