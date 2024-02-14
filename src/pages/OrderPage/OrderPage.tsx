@@ -1,23 +1,24 @@
 import { FC, useEffect } from "react";
-import { useAppSelector } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { getPossibleOrder } from "../../redux/orderSlice";
+// import * as _ from "lodash";
 import "./orderPage.scss";
 
-const OrderPage:FC = () => {
+const OrderPage: FC = () => {
+  const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
 
-  useEffect(()=>{
-console.log(dalyMenu)
-  }, [])
+  useEffect(() => {
+    dispatch(getPossibleOrder())
+  }, []);
 
   return (
     <div className="order_wrap">
       <fieldset>
         <legend>Меню 1</legend>
-        {/* {dalyMenu.menu1.map((menu)=>{
-        return(
-
-        )
-      })} */}
+        {Object.values(dalyMenu.menu1).map((menuItem, index) => {
+          return <p key={index}>{menuItem}</p>;
+        })}
       </fieldset>
       <fieldset>
         <legend>Меню 2</legend>

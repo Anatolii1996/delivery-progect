@@ -44,5 +44,6 @@ export default function* menuSaga() {
   console.log("menuSaga started");
   //срабатывает когда заходишь на /admin, потом изменить
   yield takeEvery("dishesSlice/getDishes", getMenuWorker);
+  yield takeEvery("orderSlice/getPossibleOrder", getMenuWorker);
   yield takeEvery("dalyMenu/changeDalyMenu", changeMenuWorker);
 }
