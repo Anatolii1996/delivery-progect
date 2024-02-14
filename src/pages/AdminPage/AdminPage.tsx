@@ -2,7 +2,6 @@ import { useState, useEffect, FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
 import moment from "moment";
-import cn from "classnames";
 import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
 import { changeDalyMenu } from "../../redux/menuSlice";
