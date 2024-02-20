@@ -1,10 +1,25 @@
-.order_wrap{
-    fieldset{
-        width: 90%;
-        margin: auto;
-        padding: 10px 20px;
-        legend{
-            font-weight: 700;
-        }
+.order_wrap {
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+  fieldset {
+    width: 30%;
+    height: min-content;
+    padding: 10px 20px;
+
+    legend {
+      font-weight: 700;
     }
+  }
+  li, .dessert_wrap {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  
+  img {
+    width: 200px;
+    aspect-ratio: 3/2;
+  }
 }
