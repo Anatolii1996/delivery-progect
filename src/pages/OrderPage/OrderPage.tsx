@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
 import "./orderPage.scss";
@@ -7,47 +7,28 @@ const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
 
-  const [firstMenu, setFirstMenu] = useState([""]);
-  const [firstImage, setFirstImage] = useState([""]);
-
   useEffect(() => {
     dispatch(getPossibleOrder());
   }, []);
-
-  useEffect(() => {
-    const menu1Values = Object.values(dalyMenu.menu1);
-    // console.log(menu1Values)
-
-    for (const dish of menu1Values) {
-      if (dish && dish.meal) {
-        setFirstMenu((prev: string[]) => [...prev, dish.meal]);
-        // console.log(dish.meal);
-      }
-    }
-
-    for (const dish of menu1Values) {
-      if (dish && dish.image) {
-        setFirstImage((prev: string[]) => [...prev, dish.image]);
-        // console.log(dish.meal);
-      }
-    }
-
-    // console.log(dishesArr)
-  }, [dalyMenu]);
 
   return (
     <div className="order_wrap">
       <fieldset>
         <legend>Меню 1</legend>
         <ol>
-          {firstMenu &&
-            Array.from(new Set(firstMenu.filter((item) => item !== ""))).map(
-              (menuItem, index) => <li key={index}>{menuItem}</li>
-            )}
-          {firstImage &&
+          {dalyMenu &&
+            Object.values(dalyMenu.menu1).map((menuItem, index) => {
+              return (
+                <li key={index}>
+                  <p>{menuItem.meal}</p>
+                  <img src={menuItem.image} alt="dishImage" />
+                </li>
+              );
+            })}
+          {/* {firstImage &&
             Array.from(new Set(firstImage.filter((item) => item !== ""))).map(
               (imgItem, index) => <img key={index} src={imgItem}/>
-            )}
+            )} */}
         </ol>
       </fieldset>
       <fieldset>
