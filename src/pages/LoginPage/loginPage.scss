@@ -219,7 +219,8 @@
     }
   }
   .guest_button{
-    button {
+    a {
+      display: inline-block;
       font-size: 1.5rem;
       padding: 0.8em 2em;
       background-color: #000;
@@ -231,7 +232,7 @@
       box-shadow: -5px 5px 0px 0px yellow;
     }
     
-    button:hover {
+    a:hover {
       transform: translate(5px, -5px);
     }
   }

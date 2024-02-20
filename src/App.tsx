@@ -8,6 +8,7 @@ import OrderPage from "./pages/OrderPage/OrderPage";
 
 import 'animate.css';
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 
 
 const App = () => {
@@ -16,7 +17,10 @@ const App = () => {
       <Route path="/" element={<LoginPage/>}/>
       <Route path="/register" element={<RegisterPage/>}/>
       <Route path="/admin" element={<AdminPage/>}/>
-      <Route path="/order" element={<OrderPage/>}/>
+      <Route path="/f" element={<Footer/>} >
+         <Route path="/f/order" element={<OrderPage/>}/>
+      </Route>
+     
       {/* <Route path="/add" element={<AddImage/>}/> */}
     </Routes>
     

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 import "./loginPage.scss";
 
 const LoginPage: FC = () => {
@@ -33,7 +34,7 @@ const LoginPage: FC = () => {
       
       <div className="login_main">
         <div className="guest_button">
-          <button>Увійти як гість</button>
+          <Link to="/f/order">Увійти як гість</Link>
         </div>
         <div className="btn-conteiner">
           <a className="btn-content" href="/register">
