@@ -12,20 +12,42 @@ export interface IMenu {
 }
 
 export interface IDalyMenu {
-  
-    menu1: {
-      firstDish: string;
-      secondDish: string;
-      sideDish: string;
-      salad: string;
-      bread: string;
-    },
-    menu2: {
-      mainDish: string;
-      dessert: string;
-    },
-    dessert: string,
-    date: string,
-    _id: string,
-  
+  menu1: {
+    firstDish: {
+      meal: string;
+      image: string;
+    };
+    secondDish: {
+      meal: string;
+      image: string;
+    };
+    sideDish: {
+      meal: string;
+      image: string;
+    };
+    salad: {
+      meal: string;
+      image: string;
+    };
+    bread: {
+      meal: string;
+      image: string;
+    };
+  };
+  menu2: {
+    mainDish: {
+      meal: string;
+      image: string;
+    };
+    dessert: {
+      meal: string;
+      image: string;
+    };
+  };
+  bigDessert: {
+    meal: string;
+    image: string;
+  };
+  date: string;
+  _id: string;
 }

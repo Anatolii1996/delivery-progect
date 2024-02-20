@@ -4,17 +4,41 @@ import moment from "moment";
 
 const initialState: IDalyMenu = {
   menu1: {
-    firstDish: "",
-    secondDish: "",
-    sideDish: "",
-    salad: "",
-    bread: "",
+    firstDish:{
+      meal:"",
+      image:"",
+    } ,
+    secondDish: {
+      meal:"",
+      image:"",
+    } ,
+    sideDish: {
+      meal:"",
+      image:"",
+    } ,
+    salad: {
+      meal:"",
+      image:"",
+    } ,
+    bread: {
+      meal:"",
+      image:"",
+    } ,
   },
   menu2: {
-    mainDish: "",
-    dessert: "",
+    mainDish: {
+      meal:"",
+      image:"",
+    } ,
+    dessert: {
+      meal:"",
+      image:"",
+    } ,
   },
-  dessert: "",
+  bigDessert: {
+      meal:"",
+      image:"",
+    } ,
   date: "",
   _id: "",
 };
@@ -29,13 +53,13 @@ const menuSlice = createSlice({
     },
 
     changeDalyMenu: (state, action) => {
-      state.dessert = action.payload.bigDessert;
-      state.menu1.firstDish = action.payload.firstDish;
-      state.menu1.secondDish = action.payload.secondDish;
-      state.menu1.sideDish = action.payload.sideDish;
-      state.menu1.salad = action.payload.salad;
-      state.menu2.mainDish = action.payload.mainDish;
-      state.menu2.dessert = action.payload.dessert;
+      state.bigDessert.meal = action.payload.bigDessert;
+      state.menu1.firstDish.meal = action.payload.firstDish;
+      state.menu1.secondDish.meal = action.payload.secondDish;
+      state.menu1.sideDish.meal = action.payload.sideDish;
+      state.menu1.salad.meal = action.payload.salad;
+      state.menu2.mainDish.meal = action.payload.mainDish;
+      state.menu2.dessert.meal = action.payload.dessert;
       state.date = moment().format("DD.MM.YYYY");
     },
     // createUserSuccess: (state) => {
