@@ -8,6 +8,7 @@ const OrderPage: FC = () => {
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
 
   const [firstMenu, setFirstMenu] = useState([""]);
+  const [firstImage, setFirstImage] = useState([""]);
 
   useEffect(() => {
     dispatch(getPossibleOrder());
@@ -24,6 +25,13 @@ const OrderPage: FC = () => {
       }
     }
 
+    for (const dish of menu1Values) {
+      if (dish && dish.image) {
+        setFirstImage((prev: string[]) => [...prev, dish.image]);
+        // console.log(dish.meal);
+      }
+    }
+
     // console.log(dishesArr)
   }, [dalyMenu]);
 
@@ -35,6 +43,10 @@ const OrderPage: FC = () => {
           {firstMenu &&
             Array.from(new Set(firstMenu.filter((item) => item !== ""))).map(
               (menuItem, index) => <li key={index}>{menuItem}</li>
+            )}
+          {firstImage &&
+            Array.from(new Set(firstImage.filter((item) => item !== ""))).map(
+              (imgItem, index) => <img key={index} src={imgItem}/>
             )}
         </ol>
       </fieldset>
