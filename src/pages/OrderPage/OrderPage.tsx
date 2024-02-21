@@ -1,10 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormState } from "./types";
-import { Icon } from "@iconify/react/dist/iconify.js";
+
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
+
 import "./orderPage.scss";
+import OrderItem from "../../components/OrderItem/OrderItem";
 
 const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -64,7 +66,7 @@ const OrderPage: FC = () => {
     });
   }, [dalyMenu]);
 
-  const { register, handleSubmit } = useForm<FormState>();
+  const { handleSubmit } = useForm<FormState>();
 
   const onSubmit: SubmitHandler<FormState> = () => {
     // Здесь вы можете выполнить действия с данными формы
@@ -129,22 +131,12 @@ const OrderPage: FC = () => {
                 <ol>
                   {Object.entries(dalyMenu.menu1).map(
                     ([key, menuItem], index) => (
-                      <li key={index}>
-                        
-                          <p>
-                            <span>{index + 1}.</span> {menuItem.meal}
-                          </p>
-                          {(key === "firstDish" || key === "salad") && (
-                            <Icon
-                              icon="fluent-emoji-flat:cross-mark"
-                              width="12"
-                              height="12"
-                            />
-                          )}
-                       
-
-                        <img src={menuItem.image} alt="dishImage" />
-                      </li>
+                      <OrderItem
+                        key={key}
+                        label={key}
+                        menuItem={menuItem}
+                        index={index}
+                      />
                     )
                   )}
                 </ol>
@@ -199,14 +191,16 @@ const OrderPage: FC = () => {
                   </label>
                 </div>
                 <ol>
-                  {Object.values(dalyMenu.menu2).map((menuItem, index) => (
-                    <li key={index}>
-                      <p>
-                        <span>{index + 1}.</span> {menuItem.meal}
-                      </p>
-                      <img src={menuItem.image} alt="dishImage" />
-                    </li>
-                  ))}
+                  {Object.entries(dalyMenu.menu2).map(
+                    ([key, menuItem], index) => (
+                      <OrderItem
+                        key={key}
+                        label={key}
+                        menuItem={menuItem}
+                        index={index}
+                      />
+                    )
+                  )}
                 </ol>
               </fieldset>
               <fieldset>
