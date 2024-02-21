@@ -1,4 +1,6 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { FormValues } from "./types";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
 import "./orderPage.scss";
@@ -11,17 +13,104 @@ const OrderPage: FC = () => {
     dispatch(getPossibleOrder());
   }, []);
 
+  const [formState, setFormState] = useState({
+    firstMenu: {
+      firstDish: {
+        meal: "",
+        checked: false,
+      },
+      secondDish: {
+        meal: "",
+        checked: false,
+      },
+      sideDish: {
+        meal: "",
+        checked: false,
+      },
+      salad: {
+        meal: "",
+        checked: false,
+      },
+      bread: false,
+    },
+    secondMenu: {
+      mainDish: {
+        meal: "",
+        checked: false,
+      },
+      dessert: {
+        meal: "",
+        checked: false,
+      },
+    },
+    bigDessert: {
+      meal: "",
+      checked: false,
+    },
+  });
+
+  useEffect(() => {
+    setFormState((prev)=>{
+      return(
+        {
+          firstMenu: {
+            firstDish: {
+              meal: dalyMenu.menu1.firstDish.meal,
+              checked:prev.firstMenu.firstDish.checked
+            },
+            secondDish: {
+              meal: dalyMenu.menu1.secondDish.meal,
+              checked:prev.firstMenu.secondDish.checked
+            },
+            sideDish: {
+              meal: dalyMenu.menu1.sideDish.meal,
+              checked:prev.firstMenu.sideDish.checked
+            },
+            salad: {
+              meal: dalyMenu.menu1.salad.meal,
+              checked:prev.firstMenu.salad.checked
+            },
+            bread: prev.firstMenu.bread
+          },
+          secondMenu: {
+            mainDish: {
+              meal: dalyMenu.menu2.mainDish.meal,
+              checked:prev.secondMenu.mainDish.checked
+            },
+            dessert: {
+              meal: dalyMenu.menu2.dessert.meal,
+              checked:prev.secondMenu.dessert.checked
+            },
+          },
+          bigDessert: {
+            meal: dalyMenu.bigDessert.meal,
+            checked:prev.bigDessert.checked
+          },
+        }
+      )
+     
+    });
+  }, [dalyMenu]);
+
+  // const { register, handleSubmit } = useForm<FormValues>({});
+
   return (
     <div className="order_wrap">
       {dalyMenu && (
         <>
-          <form>
+          <form
+          //  onSubmit={handleSubmit(onSubmit)
+          >
             <div className="form_body">
               <fieldset>
                 <legend>Меню 1</legend>
                 <ol>
                   {Object.values(dalyMenu.menu1).map((menuItem, index) => (
                     <li key={index}>
+                      <label className="container">
+                        <input type="checkbox" />
+                        <div className="checkmark"></div>
+                      </label>
                       <p>
                         <span>{index + 1}.</span> {menuItem.meal}
                       </p>
