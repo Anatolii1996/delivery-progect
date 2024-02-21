@@ -50,45 +50,42 @@ const OrderPage: FC = () => {
   });
 
   useEffect(() => {
-    setFormState((prev)=>{
-      return(
-        {
-          firstMenu: {
-            firstDish: {
-              meal: dalyMenu.menu1.firstDish.meal,
-              checked:prev.firstMenu.firstDish.checked
-            },
-            secondDish: {
-              meal: dalyMenu.menu1.secondDish.meal,
-              checked:prev.firstMenu.secondDish.checked
-            },
-            sideDish: {
-              meal: dalyMenu.menu1.sideDish.meal,
-              checked:prev.firstMenu.sideDish.checked
-            },
-            salad: {
-              meal: dalyMenu.menu1.salad.meal,
-              checked:prev.firstMenu.salad.checked
-            },
-            bread: prev.firstMenu.bread
+    setFormState((prev) => {
+      return {
+        firstMenu: {
+          firstDish: {
+            meal: dalyMenu.menu1.firstDish.meal,
+            checked: prev.firstMenu.firstDish.checked,
           },
-          secondMenu: {
-            mainDish: {
-              meal: dalyMenu.menu2.mainDish.meal,
-              checked:prev.secondMenu.mainDish.checked
-            },
-            dessert: {
-              meal: dalyMenu.menu2.dessert.meal,
-              checked:prev.secondMenu.dessert.checked
-            },
+          secondDish: {
+            meal: dalyMenu.menu1.secondDish.meal,
+            checked: prev.firstMenu.secondDish.checked,
           },
-          bigDessert: {
-            meal: dalyMenu.bigDessert.meal,
-            checked:prev.bigDessert.checked
+          sideDish: {
+            meal: dalyMenu.menu1.sideDish.meal,
+            checked: prev.firstMenu.sideDish.checked,
           },
-        }
-      )
-     
+          salad: {
+            meal: dalyMenu.menu1.salad.meal,
+            checked: prev.firstMenu.salad.checked,
+          },
+          bread: prev.firstMenu.bread,
+        },
+        secondMenu: {
+          mainDish: {
+            meal: dalyMenu.menu2.mainDish.meal,
+            checked: prev.secondMenu.mainDish.checked,
+          },
+          dessert: {
+            meal: dalyMenu.menu2.dessert.meal,
+            checked: prev.secondMenu.dessert.checked,
+          },
+        },
+        bigDessert: {
+          meal: dalyMenu.bigDessert.meal,
+          checked: prev.bigDessert.checked,
+        },
+      };
     });
   }, [dalyMenu]);
 
@@ -105,18 +102,41 @@ const OrderPage: FC = () => {
               <fieldset>
                 <legend>Меню 1</legend>
                 <ol>
-                  {Object.values(dalyMenu.menu1).map((menuItem, index) => (
-                    <li key={index}>
-                      <label className="container">
-                        <input type="checkbox" />
-                        <div className="checkmark"></div>
-                      </label>
-                      <p>
-                        <span>{index + 1}.</span> {menuItem.meal}
-                      </p>
-                      <img src={menuItem.image} alt="dishImage" />
-                    </li>
-                  ))}
+                  {Object.entries(dalyMenu.menu1).map(
+                    ([key, menuItem], index) => (
+                      <li key={index}>
+                        <label className="container">
+                          <input
+                            type="checkbox"
+                            onChange={(e) => {
+                              const isChecked = e.target.checked;
+                              // console.log(isChecked);
+                              // console.log(key);
+                              // console.log(menuItem.meal);
+
+                              setFormState((prev) => {
+                                return {
+                                  ...prev,
+                                  firstMenu: {
+                                    ...prev.firstMenu,
+                                    [key]: {
+                                      meal: menuItem.meal,
+                                      checked: isChecked, // Toggle the checked state
+                                    },
+                                  },
+                                };
+                              });
+                            }}
+                          />
+                          <div className="checkmark"></div>
+                        </label>
+                        <p>
+                          <span>{index + 1}.</span> {menuItem.meal}
+                        </p>
+                        <img src={menuItem.image} alt="dishImage" />
+                      </li>
+                    )
+                  )}
                 </ol>
               </fieldset>
               <fieldset>
