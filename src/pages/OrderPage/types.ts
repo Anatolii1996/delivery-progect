@@ -1,35 +1,34 @@
 export interface FormValues {
   firstMenu: {
-    firstDish: {
-      meal: string;
-      checked: boolean;
-    };
-    secondDish: {
-      meal: string;
-      checked: boolean;
-    };
-    sideDish: {
-      meal: string;
-      checked: boolean;
-    };
-    salad: {
-      meal: string;
-      checked: boolean;
-    };
+    firstDish:string;
+    secondDish: string;
+    sideDish: string;
+    salad: string;
     bread: boolean;
   };
   secondMenu: {
-    mainDish: {
-      meal: string;
-      checked: boolean;
-    };
-    dessert: {
-      meal: string;
-      checked: boolean;
-    };
+    mainDish: string;
+    dessert: string;
+  };
+  bigDessert:string;
+}
+
+export interface FormState {
+  firstMenu: {
+    firstDish: string;
+    secondDish: string;
+    sideDish: string;
+    salad: string;
+    bread: string;
+    isChecked: boolean;
+  };
+  secondMenu: {
+    mainDish: string;
+    dessert: string;
+    isChecked: boolean;
   };
   bigDessert: {
     meal: string;
-    checked: boolean;
+    isChecked: boolean;
   };
 }
