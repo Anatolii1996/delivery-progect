@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-// import { useForm, SubmitHandler } from "react-hook-form";
-import { FormValues, FormState } from "./types";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { FormState } from "./types";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
 import "./orderPage.scss";
@@ -21,16 +21,19 @@ const OrderPage: FC = () => {
       salad: "",
       bread: "",
       isChecked: false,
+      count: 0,
     },
     secondMenu: {
       mainDish: "",
       dessert: "",
       isChecked: false,
+      count: 0,
     },
-    bigDessert:{
+    bigDessert: {
       meal: "",
       isChecked: false,
-    } 
+      count: 0,
+    },
   });
 
   useEffect(() => {
@@ -43,53 +46,85 @@ const OrderPage: FC = () => {
           salad: dalyMenu.menu1.salad.meal,
           bread: dalyMenu.menu1.bread.meal,
           isChecked: prev.firstMenu.isChecked,
+          count: prev.firstMenu.count,
         },
         secondMenu: {
           mainDish: dalyMenu.menu2.mainDish.meal,
           dessert: dalyMenu.menu2.dessert.meal,
           isChecked: prev.secondMenu.isChecked,
+          count: prev.secondMenu.count,
         },
-        bigDessert:{
-          meal:dalyMenu.bigDessert.meal,
+        bigDessert: {
+          meal: dalyMenu.bigDessert.meal,
           isChecked: prev.bigDessert.isChecked,
-        } 
+          count: prev.bigDessert.count,
+        },
       };
     });
   }, [dalyMenu]);
 
-  // const { register, handleSubmit } = useForm<FormValues>({});
+  const { register, handleSubmit } = useForm<FormState>();
+
+  const onSubmit: SubmitHandler<FormState> = () => {
+    // Здесь вы можете выполнить действия с данными формы
+    console.log(formState);
+  };
 
   return (
     <div className="order_wrap">
       {dalyMenu && (
         <>
-          <form
-          //  onSubmit={handleSubmit(onSubmit)
-          >
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form_body">
               <fieldset>
                 <legend>Меню 1</legend>
-                <label className="container">
-                  <input
-                    type="checkbox"
-                    value="firstMenu"
-                    onChange={(e) => {
-                      const key: keyof FormState = e.target.value as keyof FormState;
-                      const isChecked = e.target.checked;
-                      console.log(key);
-                      setFormState((prev) => {
-                        return {
-                          ...prev,
-                          [key]: {
-                            ...prev[key], // обновляем только вложенный объект, соответствующий ключу
-                            isChecked: isChecked,
-                          },
-                        };
-                      });
-                    }}
-                  />
-                  <div className="checkmark"></div>
-                </label>
+                <div className="order_header">
+                  <label>
+                    Кількість порцій:{" "}
+                    <input
+                      type="number"
+                      value={formState.firstMenu.count}
+                      onChange={(e) => {
+                        // console.log(e.target.value);
+                        setFormState((prev) => {
+                          if (+e.target.value < 0) {
+                            return prev;
+                          } else {
+                            return {
+                              ...prev,
+                              firstMenu: {
+                                ...prev.firstMenu,
+                                count: +e.target.value,
+                                isChecked: +e.target.value > 0 ? true : false,
+                              },
+                            };
+                          }
+                        });
+                      }}
+                    />
+                  </label>
+                  <label className="container">
+                    <input
+                      type="checkbox"
+                      checked={formState.firstMenu.isChecked}
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        // console.log(key);
+                        setFormState((prev) => {
+                          return {
+                            ...prev,
+                            firstMenu: {
+                              ...prev.firstMenu, // обновляем только вложенный объект, соответствующий ключу
+                              isChecked: !prev.firstMenu.isChecked,
+                              count: isChecked ? 1 : 0,
+                            },
+                          };
+                        });
+                      }}
+                    />
+                    <div className="checkmark"></div>
+                  </label>
+                </div>
                 <ol>
                   {Object.values(dalyMenu.menu1).map((menuItem, index) => (
                     <li key={index}>
@@ -103,24 +138,53 @@ const OrderPage: FC = () => {
               </fieldset>
               <fieldset>
                 <legend>Меню 2</legend>
-                <label className="container">
-                  <input type="checkbox" value="secondMenu"
-                    onChange={(e) => {
-                      const key: keyof FormState = e.target.value as keyof FormState;
-                      const isChecked = e.target.checked;
-                      console.log(key);
-                      setFormState((prev) => {
-                        return {
-                          ...prev,
-                          [key]: {
-                            ...prev[key], // обновляем только вложенный объект, соответствующий ключу
-                            isChecked: isChecked,
-                          },
-                        };
-                      });
-                    }}/>
-                  <div className="checkmark"></div>
-                </label>
+                <div className="order_header">
+                  <label>
+                    Кількість порцій:{" "}
+                    <input
+                      type="number"
+                      value={formState.secondMenu.count}
+                      onChange={(e) => {
+                        // console.log(e.target.value);
+                        setFormState((prev) => {
+                          if (+e.target.value < 0) {
+                            return prev;
+                          } else {
+                            return {
+                              ...prev,
+                              secondMenu: {
+                                ...prev.secondMenu,
+                                count: +e.target.value,
+                                isChecked: +e.target.value > 0 ? true : false,
+                              },
+                            };
+                          }
+                        });
+                      }}
+                    />
+                  </label>
+                  <label className="container">
+                    <input
+                      type="checkbox"
+                      checked={formState.secondMenu.isChecked}
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        // console.log(key);
+                        setFormState((prev) => {
+                          return {
+                            ...prev,
+                            secondMenu: {
+                              ...prev.secondMenu, // обновляем только вложенный объект, соответствующий ключу
+                              isChecked: !prev.secondMenu.isChecked,
+                              count: isChecked ? 1 : 0,
+                            },
+                          };
+                        });
+                      }}
+                    />
+                    <div className="checkmark"></div>
+                  </label>
+                </div>
                 <ol>
                   {Object.values(dalyMenu.menu2).map((menuItem, index) => (
                     <li key={index}>
@@ -134,24 +198,53 @@ const OrderPage: FC = () => {
               </fieldset>
               <fieldset>
                 <legend>Десерт</legend>
-                <label className="container">
-                  <input type="checkbox" value="bigDessert"
-                    onChange={(e) => {
-                      const key: keyof FormState = e.target.value as keyof FormState;
-                      const isChecked = e.target.checked;
-                      console.log(key);
-                      setFormState((prev) => {
-                        return {
-                          ...prev,
-                          [key]: {
-                            ...prev[key], // обновляем только вложенный объект, соответствующий ключу
-                            isChecked: isChecked,
-                          },
-                        };
-                      });
-                    }}/>
-                  <div className="checkmark"></div>
-                </label>
+                <div className="order_header">
+                  <label>
+                    Кількість порцій:{" "}
+                    <input
+                      type="number"
+                      value={formState.bigDessert.count}
+                      onChange={(e) => {
+                        // console.log(e.target.value);
+                        setFormState((prev) => {
+                          if (+e.target.value < 0) {
+                            return prev;
+                          } else {
+                            return {
+                              ...prev,
+                              bigDessert: {
+                                ...prev.bigDessert,
+                                count: +e.target.value,
+                                isChecked: +e.target.value > 0 ? true : false,
+                              },
+                            };
+                          }
+                        });
+                      }}
+                    />
+                  </label>
+                  <label className="container">
+                    <input
+                      type="checkbox"
+                      checked={formState.bigDessert.isChecked}
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        // console.log(key);
+                        setFormState((prev) => {
+                          return {
+                            ...prev,
+                            bigDessert: {
+                              ...prev.bigDessert, // обновляем только вложенный объект, соответствующий ключу
+                              isChecked: !prev.bigDessert.isChecked,
+                              count: isChecked ? 1 : 0,
+                            },
+                          };
+                        });
+                      }}
+                    />
+                    <div className="checkmark"></div>
+                  </label>
+                </div>
                 <div className="dessert_wrap">
                   <p>{dalyMenu.bigDessert.meal}</p>
                   <img src={dalyMenu.bigDessert.image} alt="dishImage" />

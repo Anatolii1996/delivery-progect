@@ -4,11 +4,18 @@
   form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     .form_body {
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
+      .order_header{
+        display: flex;
+        justify-content: space-between;
+        input[type=number]{
+          width: 50px;
+        }
+      }
       fieldset {
         width: 30%;
         height: min-content;
@@ -53,7 +60,6 @@
   .container {
     display: block;
     position: relative;
-    margin-left: 90%;
     cursor: pointer;
     font-size: 20px;
     user-select: none;
