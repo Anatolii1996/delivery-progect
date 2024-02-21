@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormState } from "./types";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
 import "./orderPage.scss";
@@ -126,14 +127,26 @@ const OrderPage: FC = () => {
                   </label>
                 </div>
                 <ol>
-                  {Object.values(dalyMenu.menu1).map((menuItem, index) => (
-                    <li key={index}>
-                      <p>
-                        <span>{index + 1}.</span> {menuItem.meal}
-                      </p>
-                      <img src={menuItem.image} alt="dishImage" />
-                    </li>
-                  ))}
+                  {Object.entries(dalyMenu.menu1).map(
+                    ([key, menuItem], index) => (
+                      <li key={index}>
+                        
+                          <p>
+                            <span>{index + 1}.</span> {menuItem.meal}
+                          </p>
+                          {(key === "firstDish" || key === "salad") && (
+                            <Icon
+                              icon="fluent-emoji-flat:cross-mark"
+                              width="12"
+                              height="12"
+                            />
+                          )}
+                       
+
+                        <img src={menuItem.image} alt="dishImage" />
+                      </li>
+                    )
+                  )}
                 </ol>
               </fieldset>
               <fieldset>

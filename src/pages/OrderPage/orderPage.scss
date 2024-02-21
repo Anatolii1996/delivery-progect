@@ -9,10 +9,10 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
-      .order_header{
+      .order_header {
         display: flex;
         justify-content: space-between;
-        input[type=number]{
+        input[type="number"] {
           width: 50px;
         }
       }
@@ -20,7 +20,8 @@
         width: 30%;
         height: min-content;
         padding: 10px 20px;
-        ol, .dessert_wrap {
+        ol,
+        .dessert_wrap {
           padding-top: 20px;
         }
         legend {
@@ -32,6 +33,19 @@
         margin-bottom: 15px;
         display: flex;
         justify-content: space-between;
+
+       
+      }
+
+      li{
+        p{
+          width: 100px;
+        }
+        svg{
+          position: relative;
+          left: 200px;
+          cursor: pointer;
+         }
       }
 
       img {
