@@ -8,11 +8,11 @@ import App from "./App.tsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </React.StrictMode>
-    </Provider>
-  </BrowserRouter>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

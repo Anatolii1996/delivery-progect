@@ -7,6 +7,7 @@ import { getPossibleOrder } from "../../redux/orderSlice";
 
 import "./orderPage.scss";
 import OrderItem from "../../components/OrderItem/OrderItem";
+import MenuItem from "../../components/MenuItem/MenuItem";
 
 const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -79,7 +80,8 @@ const OrderPage: FC = () => {
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form_body">
-              <fieldset>
+              <MenuItem object={dalyMenu.menu1} formState={formState} setFormState={setFormState} menuLabel={"Меню 1"} />
+              {/* <fieldset>
                 <legend>Меню 1</legend>
                 <div className="order_header">
                   <label>
@@ -140,8 +142,9 @@ const OrderPage: FC = () => {
                     )
                   )}
                 </ol>
-              </fieldset>
-              <fieldset>
+              </fieldset> */}
+ <MenuItem object={dalyMenu.menu2} formState={formState} setFormState={setFormState} menuLabel={"Меню 2"}/>
+              {/* <fieldset>
                 <legend>Меню 2</legend>
                 <div className="order_header">
                   <label>
@@ -202,7 +205,8 @@ const OrderPage: FC = () => {
                     )
                   )}
                 </ol>
-              </fieldset>
+              </fieldset> */}
+{/* <MenuItem object={dalyMenu.bigDessert} formState={formState} setFormState={setFormState}/> */}
               <fieldset>
                 <legend>Десерт</legend>
                 <div className="order_header">
