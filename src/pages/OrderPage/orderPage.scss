@@ -27,7 +27,12 @@
         legend {
           font-weight: 700;
         }
+        &:nth-of-type(2){
+          margin: 0 50px;
+        }
       }
+      
+
       .dessert_wrap {
         margin-bottom: 15px;
         display: flex;

@@ -8,29 +8,18 @@ const MenuItem: FC<MenuItemProps> = ({
   formState,
   menuLabel,
 }) => {
-  const currentMenu = () => {
-    switch (menuLabel) {
-      case "Меню 1":
-        return formState.firstMenu;
-      case "Меню 2":
-        return formState.secondMenu;
-      default:
-        return null; // или другое значение по умолчанию, если нужно
-    }
-  };
-
-  const currentMenuItem = () => {
+  const currentMenuKey: "firstMenu" | "secondMenu"|"bigDessert" = (() => {
     switch (menuLabel) {
       case "Меню 1":
         return "firstMenu";
       case "Меню 2":
         return "secondMenu";
+      case "Десерт":
+        return "bigDessert";
       default:
-        return ""; // или другое значение по умолчанию, если нужно
+        return "firstMenu"; // или другое значение по умолчанию, если нужно
     }
-  };
-
-  const currentMenuKey = currentMenuItem();
+  })();
 
   return (
     <fieldset>
@@ -40,7 +29,7 @@ const MenuItem: FC<MenuItemProps> = ({
           Кількість порцій:{" "}
           <input
             type="number"
-            value={currentMenu()?.count}
+            value={formState[currentMenuKey]?.count}
             onChange={(e) => {
               // console.log(e.target.value);
               setFormState((prev: any) => {
@@ -63,7 +52,7 @@ const MenuItem: FC<MenuItemProps> = ({
         <label className="container">
           <input
             type="checkbox"
-            checked={currentMenu()?.isChecked}
+            checked={formState[currentMenuKey]?.isChecked}
             onChange={(e) => {
               const isChecked = e.target.checked;
               // console.log(key);
