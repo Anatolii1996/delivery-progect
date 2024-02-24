@@ -29,7 +29,7 @@ function* createuserWorker(action:IUserAction): any {
 
   } catch (error) {
     // В случае ошибки, диспатчим экшн createUserFailure
-    yield put(createUserFailure(error));
+    yield put(createUserFailure(`${error}`));
   }
 }
 

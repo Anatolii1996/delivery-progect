@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IDalyMenu } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IDalyMenu, IChangeMenu } from "./types";
 import moment from "moment";
 
 const initialState: IDalyMenu = {
@@ -50,12 +50,13 @@ const menuSlice = createSlice({
   name: "dalyMenu",
   initialState,
   reducers: {
-    getDalyMenu: (state, action) => {
+    getDalyMenu: (state, action:PayloadAction<IDalyMenu>) => {
       // console.log(action.payload)
       return { ...state, ...action.payload };
     },
 
-    changeDalyMenu: (state, action) => {
+    changeDalyMenu: (state, action:PayloadAction<IChangeMenu>) => {
+      // console.log(action.payload)
       state.bigDessert.nameDessert.meal = action.payload.bigDessert;
       state.menu1.firstDish.meal = action.payload.firstDish;
       state.menu1.secondDish.meal = action.payload.secondDish;
@@ -65,15 +66,7 @@ const menuSlice = createSlice({
       state.menu2.dessert.meal = action.payload.dessert;
       state.date = moment().format("DD.MM.YYYY");
     },
-    // createUserSuccess: (state) => {
-    //   // Этот экшн вызывается в саге при успешной отправке данных на бекенд
-    //   state.message = "Замовлення успішно відправлено";
-    // },
-    // createUserFailure: (state, action) => {
-    //   // Этот экшн вызывается в саге в случае ошибки при отправке данных на бекенд
-    //   state.message = "Нажаль замовлення не відправлено";
-    //   console.error("Create user failed:", action.payload);
-    // },
+   
   },
 });
 

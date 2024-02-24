@@ -5,7 +5,7 @@ import { getDalyMenu } from "../redux/menuSlice";
 import axios from "axios";
 
 function* getMenuWorker(): any {
-  console.log("getMenuWorker started");
+  // console.log("getMenuWorker started");
 
   try {
     const payload = yield axios.get<IDalyMenu[]>(
@@ -20,7 +20,7 @@ function* getMenuWorker(): any {
 
 function* changeMenuWorker(action:IDalyAction): any {
   console.log("changeMenuWorker started");
-console.log(action.payload)
+// console.log(action.payload)
   try {
     const config = {
       method: "patch",
@@ -41,7 +41,7 @@ console.log(action.payload)
 
 
 export default function* menuSaga() {
-  console.log("menuSaga started");
+  // console.log("menuSaga started");
   //срабатывает когда заходишь на /admin, потом изменить
   yield takeEvery("dishesSlice/getDishes", getMenuWorker);
   yield takeEvery("orderSlice/getPossibleOrder", getMenuWorker);

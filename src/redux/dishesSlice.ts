@@ -1,4 +1,4 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice, createAction, PayloadAction } from "@reduxjs/toolkit";
 import { IMenu } from "./types";
 
 const initialState: IMenu = {
@@ -15,23 +15,23 @@ const dishesSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
-    getFirstDishes: (state, action) => {
+    getFirstDishes: (state, action:PayloadAction<string[]>) => {
       state.dishes.firstDishes = action.payload;
     },
 
-    getSecondDishes: (state, action) => {
+    getSecondDishes: (state, action:PayloadAction<string[]>) => {
       state.dishes.secondDishes = action.payload;
     },
 
-    getSideDishes: (state, action) => {
+    getSideDishes: (state, action:PayloadAction<string[]>) => {
       state.dishes.sideDishes = action.payload;
     },
 
-    getSalads: (state, action) => {
+    getSalads: (state, action:PayloadAction<string[]>) => {
       state.dishes.salads = action.payload;
     },
 
-    getDesserts: (state, action) => {
+    getDesserts: (state, action:PayloadAction<string[]>) => {
       state.dishes.desserts = action.payload;
     },
   },

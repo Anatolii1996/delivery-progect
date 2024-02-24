@@ -1,6 +1,15 @@
 export interface IUserMessage {
   message: string;
 }
+
+export interface IUserState {
+  name: string;
+  password: string;
+  email: string;
+  tel: string;
+  address: string;
+}
+
 export interface IMenu {
   dishes: {
     firstDishes: string[];
@@ -45,12 +54,22 @@ export interface IDalyMenu {
     };
   };
   bigDessert: {
-    nameDessert:{
-       meal: string;
-    image: string;
-    }
-   
+    nameDessert: {
+      meal: string;
+      image: string;
+    };
   };
   date: string;
   _id: string;
+}
+
+export interface IChangeMenu {
+  bigDessert: string;
+  firstDish: string;
+  secondDish: string;
+  sideDish: string;
+  salad: string;
+
+  mainDish: string;
+  dessert: string;
 }
