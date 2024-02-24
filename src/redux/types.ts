@@ -45,8 +45,11 @@ export interface IDalyMenu {
     };
   };
   bigDessert: {
-    meal: string;
+    nameDessert:{
+       meal: string;
     image: string;
+    }
+   
   };
   date: string;
   _id: string;

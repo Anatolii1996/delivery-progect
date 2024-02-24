@@ -33,7 +33,10 @@ const OrderPage: FC = () => {
       count: 0,
     },
     bigDessert: {
-      meal: "",
+      nameDessert: {
+        meal: "",
+      },
+
       isChecked: false,
       count: 0,
     },
@@ -58,7 +61,10 @@ const OrderPage: FC = () => {
           count: prev.secondMenu.count,
         },
         bigDessert: {
-          meal: dalyMenu.bigDessert.meal,
+          nameDessert: {
+            meal: dalyMenu.bigDessert.nameDessert.meal,
+          },
+
           isChecked: prev.bigDessert.isChecked,
           count: prev.bigDessert.count,
         },
@@ -92,64 +98,15 @@ const OrderPage: FC = () => {
                 setFormState={setFormState}
                 menuLabel={"Меню 2"}
               />
-            
-              <fieldset>
-                <legend>Десерт</legend>
-                <div className="order_header">
-                  <label>
-                    Кількість порцій:{" "}
-                    <input
-                      type="number"
-                      value={formState.bigDessert.count}
-                      onChange={(e) => {
-                        // console.log(e.target.value);
-                        setFormState((prev) => {
-                          if (+e.target.value < 0) {
-                            return prev;
-                          } else {
-                            return {
-                              ...prev,
-                              bigDessert: {
-                                ...prev.bigDessert,
-                                count: +e.target.value,
-                                isChecked: +e.target.value > 0 ? true : false,
-                              },
-                            };
-                          }
-                        });
-                      }}
-                    />
-                  </label>
-                  <label className="container">
-                    <input
-                      type="checkbox"
-                      checked={formState.bigDessert.isChecked}
-                      onChange={(e) => {
-                        const isChecked = e.target.checked;
-                        // console.log(key);
-                        setFormState((prev) => {
-                          return {
-                            ...prev,
-                            bigDessert: {
-                              ...prev.bigDessert, // обновляем только вложенный объект, соответствующий ключу
-                              isChecked: !prev.bigDessert.isChecked,
-                              count: isChecked ? 1 : 0,
-                            },
-                          };
-                        });
-                      }}
-                    />
-                    <div className="checkmark"></div>
-                  </label>
-                </div>
-                <ol>
-                  <div className="order_item">
-                    <li><p>{dalyMenu.bigDessert.meal}</p>
-                  <img src={dalyMenu.bigDessert.image} alt="dishImage" /></li>
-                  </div>
-                </ol>
-               
-              </fieldset>
+
+              <MenuItem
+                object={dalyMenu.bigDessert}
+                formState={formState}
+                setFormState={setFormState}
+                menuLabel={"Десерт"}
+              />
+
+              
             </div>
             <button className="submit">Відправити</button>
           </form>

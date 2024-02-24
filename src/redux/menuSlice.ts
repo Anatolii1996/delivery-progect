@@ -36,8 +36,11 @@ const initialState: IDalyMenu = {
     } ,
   },
   bigDessert: {
-      meal:"",
+    nameDessert:{
+       meal:"",
       image:"",
+    }
+     
     } ,
   date: "",
   _id: "",
@@ -53,7 +56,7 @@ const menuSlice = createSlice({
     },
 
     changeDalyMenu: (state, action) => {
-      state.bigDessert.meal = action.payload.bigDessert;
+      state.bigDessert.nameDessert.meal = action.payload.bigDessert;
       state.menu1.firstDish.meal = action.payload.firstDish;
       state.menu1.secondDish.meal = action.payload.secondDish;
       state.menu1.sideDish.meal = action.payload.sideDish;

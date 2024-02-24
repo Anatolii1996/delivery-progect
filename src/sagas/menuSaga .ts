@@ -20,7 +20,7 @@ function* getMenuWorker(): any {
 
 function* changeMenuWorker(action:IDalyAction): any {
   console.log("changeMenuWorker started");
-// console.log(action.payload)
+console.log(action.payload)
   try {
     const config = {
       method: "patch",

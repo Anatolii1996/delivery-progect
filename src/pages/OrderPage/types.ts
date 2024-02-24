@@ -17,7 +17,10 @@ export interface FormState {
     count: number
   };
   bigDessert: {
-    meal: string;
+    nameDessert:{
+       meal: string;
+    }
+   
     isChecked: boolean;
     count: number
   };
