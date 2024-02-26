@@ -1,10 +1,23 @@
+
+
+interface Dish {
+  firstDish?: string;
+  secondDish?: string;
+  sideDish?: string;
+  salad?: string;
+  bread?: string;
+  mainDish?: string;
+  dessert?: string;
+  meal?: string;
+}
+
+interface Menu {
+  dishes: Dish;
+  isChecked: boolean;
+  count: number;
+}
+
 export interface OrderItemProps {
-    key: string;
-    menuItem: {
-      meal: string;
-      image: string;
-      // Дополните остальные свойства объекта menuItem, если необходимо
-    };
-    index: number;
-    label: string;
-  }
+  object: Menu;
+  label: string;
+}

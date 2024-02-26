@@ -1,37 +1,29 @@
-import { useState, FC } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { OrderItemProps } from "./types";
-import cn from "classnames";
-import "./orderItem.scss";
+import {FC, useEffect} from 'react'
+import { OrderItemProps } from './types';
+import "./orderItem.scss"
 
-const OrderItem: FC<OrderItemProps> = ({ label, menuItem, index }) => {
-  const [isCrossed, setIsCrossed] = useState(false);
-
-  const infoClasses = cn({
-    crossed: isCrossed,
-  });
-
-  return (
-    <div className="order_item">
-      <li key={index}>
-        <p className={infoClasses}>
-          <span>{index + 1}.</span> {menuItem.meal}
-        </p>
-        {(label === "firstDish" || label === "salad") && (
-          <Icon
-            icon="fluent-emoji-flat:cross-mark"
-            width="12"
-            height="12"
-            onClick={(e) => {
-              // console.log(key)
-              setIsCrossed(!isCrossed);
-            }}
-          />
+const OrderItem: FC<OrderItemProps> = ({ object, label }) => {
+    // useEffect(() =>{
+    //     console.log(object)
+    // }, [])
+    
+    return (
+      <>
+        {object.isChecked && (
+          <>
+            <div className="orderItem_header">
+                <h4>{label}</h4>
+                <p>Порцій: <span>{object.count}</span></p>
+            </div>
+            <ol>
+              {Object.values(object.dishes).map((dish, index) => (
+                <li key={index}>{dish}</li>
+              ))}
+            </ol>
+          </>
         )}
-        <img src={menuItem.image} alt="dishImage" />
-      </li>
-    </div>
-  );
-};
+      </>
+    );
+  };
 
-export default OrderItem;
+export default OrderItem

@@ -1,0 +1,24 @@
+.order_item {
+  .crossed {
+    text-decoration: line-through;
+  }
+
+  li {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    p {
+      width: 100px;
+    }
+    svg {
+      position: relative;
+      left: 215px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 200px;
+      aspect-ratio: 3/2;
+    }
+  }
+}
