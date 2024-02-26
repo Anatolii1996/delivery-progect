@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { FormState } from "./types";
+import cn from "classnames";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
@@ -40,6 +41,16 @@ const OrderPage: FC = () => {
     address:"",
     tel:""
   });
+
+  const infoClasses = {
+    address: cn({
+      info: formState.address,
+    }),
+    tel: cn({
+      info: formState.tel,
+    }),
+    
+  };
 
   useEffect(() => {
     setFormState((prev) => {
@@ -129,7 +140,7 @@ const OrderPage: FC = () => {
                     onChange={handleFormChange}
                   />
                   <label
-                  // className={infoClasses.name}
+                  className={infoClasses.address}
                   >
                     *Адреса доставки
                   </label>
@@ -146,7 +157,7 @@ const OrderPage: FC = () => {
                     onChange={handleFormChange}
                   />
                   <label
-                  // className={infoClasses.email}
+                  className={infoClasses.tel}
                   >
                     *Номер телефону
                   </label>
