@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { FormState } from "./types";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
@@ -33,13 +33,12 @@ const OrderPage: FC = () => {
       count: 0,
     },
     bigDessert: {
-      nameDessert: {
-        meal: "",
-      },
-
+      meal: "",
       isChecked: false,
       count: 0,
     },
+    address:"",
+    tel:""
   });
 
   useEffect(() => {
@@ -61,54 +60,101 @@ const OrderPage: FC = () => {
           count: prev.secondMenu.count,
         },
         bigDessert: {
-          nameDessert: {
-            meal: dalyMenu.bigDessert.nameDessert.meal,
-          },
+          meal: dalyMenu.bigDessert.nameDessert.meal,
 
           isChecked: prev.bigDessert.isChecked,
           count: prev.bigDessert.count,
         },
+        address:prev.address,
+        tel:prev.tel,
       };
     });
   }, [dalyMenu]);
-
-  const { handleSubmit } = useForm<FormState>();
 
   const onSubmit: SubmitHandler<FormState> = () => {
     // Здесь вы можете выполнить действия с данными формы
     console.log(formState);
   };
 
+  const handleFormChange = <T extends HTMLInputElement>(
+    e: React.ChangeEvent<T>
+  ) => {
+    setFormState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormState>({  });
+
   return (
     <div className="order_wrap">
       {dalyMenu && (
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form_body">
+            
               <MenuItem
                 object={dalyMenu.menu1}
                 formState={formState}
                 setFormState={setFormState}
                 menuLabel={"Меню 1"}
               />
+              <div className="twoMenus">
+                <MenuItem
+                  object={dalyMenu.menu2}
+                  formState={formState}
+                  setFormState={setFormState}
+                  menuLabel={"Меню 2"}
+                />
 
-              <MenuItem
-                object={dalyMenu.menu2}
-                formState={formState}
-                setFormState={setFormState}
-                menuLabel={"Меню 2"}
-              />
+                <MenuItem
+                  object={dalyMenu.bigDessert}
+                  formState={formState}
+                  setFormState={setFormState}
+                  menuLabel={"Десерт"}
+                />
+              </div>
+              <div className="form_order">
+                <div className="user_box">
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    className="input"
+                    {...register("address")}
+                    value={formState.address}
+                    onChange={handleFormChange}
+                  />
+                  <label
+                  // className={infoClasses.name}
+                  >
+                    *Адреса доставки
+                  </label>
+                  {/* <p>{errors.name?.message}</p> */}
+                </div>
 
-              <MenuItem
-                object={dalyMenu.bigDessert}
-                formState={formState}
-                setFormState={setFormState}
-                menuLabel={"Десерт"}
-              />
-
-              
-            </div>
-            <button className="submit">Відправити</button>
+                <div className="user_box">
+                  <input
+                    type="email"
+                    autoComplete="off"
+                    className="input"
+                    {...register("tel")}
+                    value={formState.tel}
+                    onChange={handleFormChange}
+                  />
+                  <label
+                  // className={infoClasses.email}
+                  >
+                    *Номер телефону
+                  </label>
+                  {/* <p>{errors.email?.message}</p> */}
+                </div>
+                <button className="submit">Відправити</button>
+              </div>
+            
           </form>
         </>
       )}

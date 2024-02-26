@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { MenuItemProps } from "./types";
 import OrderItem from "../OrderItem/OrderItem";
+import "./menuItem.scss"
 
 const MenuItem: FC<MenuItemProps> = ({
   object,
