@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { MenuItemProps } from "./types";
 import OrderItem from "../DishItem/DishItem";
-import "./menuItem.scss"
+import "./menuItem.scss";
 
 const MenuItem: FC<MenuItemProps> = ({
   object,
@@ -9,7 +9,7 @@ const MenuItem: FC<MenuItemProps> = ({
   formState,
   menuLabel,
 }) => {
-  const currentMenuKey: "firstMenu" | "secondMenu"|"bigDessert" = (() => {
+  const currentMenuKey: "firstMenu" | "secondMenu" | "bigDessert" = (() => {
     switch (menuLabel) {
       case "Меню 1":
         return "firstMenu";

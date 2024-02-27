@@ -33,6 +33,7 @@ export interface FormState {
   address:string;
   tel:string;
   comment:string;
+  price:number;
 }
 
 export interface ErrorValues{

@@ -41,17 +41,19 @@ const OrderPage: FC = () => {
       count: 0,
     },
     bigDessert: {
-      dishes:{
-          meal: "",
+      dishes: {
+        meal: "",
       },
-    
+
       isChecked: false,
       count: 0,
     },
     address: "",
     tel: "",
     comment: "",
+    price: 0,
   });
+
 
   const infoClasses = {
     address: cn({
@@ -99,9 +101,29 @@ const OrderPage: FC = () => {
         address: prev.address,
         tel: prev.tel,
         comment: prev.comment,
+        price: prev.price,
       };
     });
   }, [dalyMenu]);
+
+  const calculatePrice = () => {
+    const firstMenuPrice = 115 * formState.firstMenu.count;
+    const secondMenuPrice = 149 * formState.secondMenu.count;
+    const bigDessertPrice = 39 * formState.bigDessert.count;
+  
+    const totalPrice = firstMenuPrice + secondMenuPrice + bigDessertPrice;
+  
+    setFormState((prevFormState) => ({
+      ...prevFormState,
+      price: totalPrice,
+    }));
+  };
+
+  useEffect(() => {
+    calculatePrice()
+  }, [formState.firstMenu.count, formState.secondMenu.count, formState.bigDessert.count]);
+
+ 
 
   const resolver: Resolver<FormState> = async (values) => {
     const errors: Partial<ErrorValues> = {};
@@ -196,10 +218,15 @@ const OrderPage: FC = () => {
 
             <div className="form_order">
               <h2>Ваше замовлення:</h2>
-              <OrderItem object={formState.firstMenu} label="Меню 1"/>
-              <OrderItem object={formState.secondMenu} label="Меню 2"/>
-              <OrderItem object={formState.bigDessert} label="Десерт"/>
-                         
+              <OrderItem object={formState.firstMenu} label="Меню 1" />
+              <OrderItem object={formState.secondMenu} label="Меню 2" />
+              <OrderItem object={formState.bigDessert} label="Десерт" />
+
+              <div className="order_price">
+                <h3>Вартість:</h3>
+                <p>{formState.price} грн</p>
+              </div>
+
               <div className="user_box">
                 <input
                   type="text"
