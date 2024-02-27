@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { MenuItemProps } from "./types";
-import OrderItem from "../DishItem/DishItem";
+import DishItem from "../DishItem/DishItem";
 import "./menuItem.scss";
 
 const MenuItem: FC<MenuItemProps> = ({
@@ -74,7 +74,7 @@ const MenuItem: FC<MenuItemProps> = ({
       </div>
       <ol>
         {Object.entries(object).map(([key, menuItem], index) => (
-          <OrderItem key={key} label={key} menuItem={menuItem} index={index} />
+          <DishItem key={key} label={key} menuItem={menuItem} index={index} setFormState={setFormState} />
         ))}
       </ol>
     </fieldset>

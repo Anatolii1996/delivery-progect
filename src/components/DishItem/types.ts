@@ -1,4 +1,5 @@
-export interface OrderItemProps {
+import { FormState } from "../../pages/OrderPage/types";
+export interface DishItemProps {
     key: string;
     menuItem: {
       meal: string;
@@ -7,4 +8,5 @@ export interface OrderItemProps {
     };
     index: number;
     label: string;
+    setFormState:React.Dispatch<React.SetStateAction<FormState>>;
   }
