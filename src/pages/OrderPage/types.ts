@@ -1,42 +1,40 @@
-
-
 export interface FormState {
   firstMenu: {
-    dishes:{
-       firstDish: string;
-    secondDish: string;
-    sideDish: string;
-    salad: string;
-    bread: string;
-    }
-   
+    dishes: {
+      firstDish: string;
+      secondDish: string;
+      sideDish: string;
+      salad: string;
+      bread: string;
+    };
+    label: string;
     isChecked: boolean;
-    count: number
+    count: number;
   };
   secondMenu: {
-    dishes:{
-       mainDish: string;
-    dessert: string;
-    }
-   
+    dishes: {
+      mainDish: string;
+      dessert: string;
+    };
+    label: string;
     isChecked: boolean;
-    count: number
+    count: number;
   };
   bigDessert: {
-    dishes:{
-       meal: string; 
-    }
-   
+    dishes: {
+      meal: string;
+    };
+    label: string;
     isChecked: boolean;
-    count: number
+    count: number;
   };
-  address:string;
-  tel:string;
-  comment:string;
-  price:number;
+  address: string;
+  tel: string;
+  comment: string;
+  price: number;
 }
 
-export interface ErrorValues{
+export interface ErrorValues {
   address: {
     type?: string;
     message: string;

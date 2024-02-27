@@ -27,7 +27,7 @@ const OrderPage: FC = () => {
         salad: "",
         bread: "",
       },
-
+      label: "Меню 1",
       isChecked: false,
       count: 0,
     },
@@ -36,7 +36,7 @@ const OrderPage: FC = () => {
         mainDish: "",
         dessert: "",
       },
-
+      label: "Меню 2",
       isChecked: false,
       count: 0,
     },
@@ -44,7 +44,7 @@ const OrderPage: FC = () => {
       dishes: {
         meal: "",
       },
-
+      label: "Десерт",
       isChecked: false,
       count: 0,
     },
@@ -77,6 +77,7 @@ const OrderPage: FC = () => {
             salad: dalyMenu.menu1.salad.meal,
             bread: dalyMenu.menu1.bread.meal,
           },
+          label: prev.firstMenu.label,
           isChecked: prev.firstMenu.isChecked,
           count: prev.firstMenu.count,
         },
@@ -85,7 +86,7 @@ const OrderPage: FC = () => {
             mainDish: dalyMenu.menu2.mainDish.meal,
             dessert: dalyMenu.menu2.dessert.meal,
           },
-
+          label: prev.secondMenu.label,
           isChecked: prev.secondMenu.isChecked,
           count: prev.secondMenu.count,
         },
@@ -93,7 +94,7 @@ const OrderPage: FC = () => {
           dishes: {
             meal: dalyMenu.bigDessert.nameDessert.meal,
           },
-
+          label: prev.bigDessert.label,
           isChecked: prev.bigDessert.isChecked,
           count: prev.bigDessert.count,
         },
@@ -182,7 +183,35 @@ const OrderPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormState> = () => {
     // Здесь вы можете выполнить действия с данными формы
-    console.log(formState);
+    const items = Object.entries(formState).filter(
+      ([key, item]) => item.count > 0
+    );
+
+    // console.log(items);
+    const orderObject = {
+      tel: formState.tel,
+      address: formState.address,
+      price: formState.price,
+      details: {} as { [key: string]: {
+        dishes:string[],
+        count:number
+      } },
+    };
+
+    items.forEach((item) => {
+      // console.log(item);
+      const dishesArray = Object.values(item[1].dishes) as string[];
+      const filteredDishes = dishesArray.filter((dish: string) => dish.trim() !== "");
+
+      orderObject.details[item[1].label] ={
+        dishes: filteredDishes,
+        count:item[1].count
+      } 
+      
+    });
+
+    console.log(orderObject);
+    // console.log(formState);
   };
 
   const handleFormChange = <T extends HTMLInputElement>(
