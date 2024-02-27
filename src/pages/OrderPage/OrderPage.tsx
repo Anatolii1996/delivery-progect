@@ -152,12 +152,7 @@ const OrderPage: FC = () => {
       };
     }
 
-    if (!values.tel) {
-      errors.tel = {
-        type: "required",
-        message: "* Це поле обов'язкове",
-      };
-    }
+   
     if (values.tel.length > 20) {
       errors.tel = {
         message: "* Максимальна довжина 20 символів",
@@ -174,6 +169,12 @@ const OrderPage: FC = () => {
         message: "* Максимальна довжина 200 символів",
       };
     }
+    if (!values.tel) {
+      errors.tel = {
+        type: "required",
+        message: "* Це поле обов'язкове",
+      };
+    }
 
     return {
       values: values,
@@ -183,8 +184,8 @@ const OrderPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormState> = () => {
     // Здесь вы можете выполнить действия с данными формы
-    const items = Object.entries(formState).filter(
-      ([key, item]) => item.count > 0
+    const items = Object.values(formState).filter(
+      ( item) => item.count > 0
     );
 
     // console.log(items);
@@ -200,12 +201,12 @@ const OrderPage: FC = () => {
 
     items.forEach((item) => {
       // console.log(item);
-      const dishesArray = Object.values(item[1].dishes) as string[];
+      const dishesArray = Object.values(item.dishes) as string[];
       const filteredDishes = dishesArray.filter((dish: string) => dish.trim() !== "");
 
-      orderObject.details[item[1].label] ={
+      orderObject.details[item.label] ={
         dishes: filteredDishes,
-        count:item[1].count
+        count:item.count
       } 
       
     });
@@ -304,7 +305,7 @@ const OrderPage: FC = () => {
                 <label className={infoClasses.comment}>
                   Коментар до замовлення
                 </label>
-                <p>{errors.tel?.message}</p>
+                <p>{errors.comment?.message}</p>
               </div>
               <button className="submit">Відправити</button>
             </div>
