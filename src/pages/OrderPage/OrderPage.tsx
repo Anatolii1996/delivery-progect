@@ -54,7 +54,6 @@ const OrderPage: FC = () => {
     price: 0,
   });
 
-
   const infoClasses = {
     address: cn({
       info: formState.address,
@@ -107,12 +106,20 @@ const OrderPage: FC = () => {
   }, [dalyMenu]);
 
   const calculatePrice = () => {
-    const firstMenuPrice = 115 * formState.firstMenu.count;
+    let firstMenuPrice = 115 * formState.firstMenu.count;
+
+    if (
+      !formState.firstMenu.dishes.firstDish ||
+      !formState.firstMenu.dishes.salad
+    ) {
+      firstMenuPrice = 95 * formState.firstMenu.count;
+    }
+
     const secondMenuPrice = 149 * formState.secondMenu.count;
     const bigDessertPrice = 39 * formState.bigDessert.count;
-  
+
     const totalPrice = firstMenuPrice + secondMenuPrice + bigDessertPrice;
-  
+
     setFormState((prevFormState) => ({
       ...prevFormState,
       price: totalPrice,
@@ -120,10 +127,14 @@ const OrderPage: FC = () => {
   };
 
   useEffect(() => {
-    calculatePrice()
-  }, [formState.firstMenu.count, formState.secondMenu.count, formState.bigDessert.count]);
-
- 
+    calculatePrice();
+  }, [
+    formState.firstMenu.count,
+    formState.secondMenu.count,
+    formState.bigDessert.count,
+    formState.firstMenu.dishes.firstDish,
+    formState.firstMenu.dishes.salad,
+  ]);
 
   const resolver: Resolver<FormState> = async (values) => {
     const errors: Partial<ErrorValues> = {};
