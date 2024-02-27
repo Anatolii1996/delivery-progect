@@ -1,12 +1,9 @@
-import {FC, useEffect} from 'react'
+import {FC} from 'react'
 import { OrderItemProps } from './types';
 import "./orderItem.scss"
 
 const OrderItem: FC<OrderItemProps> = ({ object, label }) => {
-    // useEffect(() =>{
-    //     console.log(object)
-    // }, [])
-    
+       
     return (
       <>
         {object.isChecked && (
@@ -16,7 +13,7 @@ const OrderItem: FC<OrderItemProps> = ({ object, label }) => {
                 <p>Порцій: <span>{object.count}</span></p>
             </div>
             <ol>
-              {Object.values(object.dishes).map((dish, index) => (
+              {Object.values(object.dishes) .filter((dish) => dish !== "").map((dish, index) => (
                 <li key={index}>{dish}</li>
               ))}
             </ol>
