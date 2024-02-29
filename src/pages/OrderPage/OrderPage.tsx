@@ -5,10 +5,11 @@ import cn from "classnames";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
+import { setOrder } from "../../redux/orderSlice";
 
 import MenuItem from "../../components/MenuItem/MenuItem";
-import "./orderPage.scss";
 import OrderItem from "../../components/OrderItem/OrderItem";
+import "./orderPage.scss";
 
 const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ const OrderPage: FC = () => {
         salad: "",
         bread: "",
       },
-      label: "Меню 1",
+      label: "Меню1",
       isChecked: false,
       count: 0,
     },
@@ -36,7 +37,7 @@ const OrderPage: FC = () => {
         mainDish: "",
         dessert: "",
       },
-      label: "Меню 2",
+      label: "Меню2",
       isChecked: false,
       count: 0,
     },
@@ -212,6 +213,7 @@ const OrderPage: FC = () => {
     });
 
     console.log(orderObject);
+    dispatch(setOrder(orderObject))
     // console.log(formState);
   };
 

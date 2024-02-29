@@ -73,3 +73,23 @@ export interface IChangeMenu {
   mainDish: string;
   dessert: string;
 }
+
+export interface IOrder {
+  tel: string;
+  address: string;
+  price: number;
+  details: {
+    Меню1?: {
+      count: number;
+      dishes:string[];
+    };
+    Меню2?: {
+      count: number;
+      dishes:string[];
+    };
+    Десерт?: {
+      count: number;
+      dishes:string[];
+    };
+  };
+}
