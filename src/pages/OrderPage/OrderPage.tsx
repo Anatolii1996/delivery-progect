@@ -212,7 +212,7 @@ const OrderPage: FC = () => {
       
     });
 
-    console.log(orderObject);
+    // console.log(orderObject);
     dispatch(setOrder(orderObject))
     // console.log(formState);
   };

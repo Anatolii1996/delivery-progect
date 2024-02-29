@@ -1,3 +1,5 @@
+import { IOrder } from "../redux/types";
+
 export interface IUserAction {
   type: string;
   payload: IUserState;
@@ -24,4 +26,9 @@ export interface IDalyForm {
   salad: string;
   secondDish: string;
   sideDish: string;
+}
+
+export interface IOrderAction {
+  type: string;
+  payload: IOrder
 }
