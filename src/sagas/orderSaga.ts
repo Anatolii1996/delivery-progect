@@ -8,15 +8,15 @@ function* setOrderWorker(action:IOrderAction): any {
     console.log("setOrderWorker started");
   console.log(action.payload)
     try {
-    //   const config = {
-    //     method: "post",
-    //     url: `${import.meta.env.VITE_SERVER_URL}/new-order`,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
-    //   };
-    //   yield axios(config);
+      const config = {
+        method: "post",
+        url: `${import.meta.env.VITE_SERVER_URL}/new-order`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
+      };
+      yield axios(config);
   
     } catch (error) {
       console.log(error);
