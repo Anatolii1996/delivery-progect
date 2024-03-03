@@ -1,14 +1,14 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useForm, SubmitHandler } from "react-hook-form";
-import moment from "moment";
+import { CurrentDateContext } from "../../context";
 import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
 import { changeDalyMenu } from "../../redux/menuSlice";
 import "./adminPage.scss";
 
 const AdminPage: FC = () => {
-  const [toDay] = useState(moment().format("DD.MM.YYYY"));
+  const currentDate = useContext(CurrentDateContext);
   const dalyMenuDate = useAppSelector((state) => state.dalyMenu.date);
   const [isToday, setIsToday] = useState(false);
 
@@ -30,12 +30,12 @@ const AdminPage: FC = () => {
     if (dalyMenuDate) {
       // console.log(toDay);
       // console.log(dalyMenuDate);
-      if (toDay === dalyMenuDate) {
+      if (currentDate === dalyMenuDate) {
         setIsToday(true);
       }
       // console.log(toDay === dalyMenuDate);
     }
-  }, [toDay, dalyMenuDate]);
+  }, [currentDate, dalyMenuDate]);
 
   const { register, handleSubmit, setValue } = useForm<FormValues>({});
 
@@ -58,7 +58,7 @@ const AdminPage: FC = () => {
 
   return (
     <div className="admin_wrap">
-      <h2>Будь-ласка оберіть меню на {toDay}!</h2>
+      <h2>Будь-ласка оберіть меню на {currentDate}!</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="first_menu">
