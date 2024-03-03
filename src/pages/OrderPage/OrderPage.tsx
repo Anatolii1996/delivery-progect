@@ -153,7 +153,6 @@ const OrderPage: FC = () => {
       };
     }
 
-   
     if (values.tel.length > 20) {
       errors.tel = {
         message: "* Максимальна довжина 20 символів",
@@ -164,16 +163,26 @@ const OrderPage: FC = () => {
         message: "* Мінімальна довжина 10 символів",
       };
     }
-
+   
+    if (!values.tel) {
+      errors.tel = {
+        type: "required",
+        message: "* Це поле обов'язкове",
+      };
+    }
+    
     if (values.comment.length > 200) {
       errors.comment = {
         message: "* Максимальна довжина 200 символів",
       };
     }
-    if (!values.tel) {
-      errors.tel = {
-        type: "required",
-        message: "* Це поле обов'язкове",
+
+    if (
+      !formState.firstMenu.dishes.firstDish &&
+      !formState.firstMenu.dishes.salad
+    ) {
+      errors.comment = {
+        message: "Ви не можете виключити дві страви",
       };
     }
 
@@ -185,35 +194,36 @@ const OrderPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormState> = () => {
     // Здесь вы можете выполнить действия с данными формы
-    const items = Object.values(formState).filter(
-      ( item) => item.count > 0
-    );
+    const items = Object.values(formState).filter((item) => item.count > 0);
 
     // console.log(items);
     const orderObject = {
       tel: formState.tel,
       address: formState.address,
       price: formState.price,
-      details: {} as { [key: string]: {
-        dishes:string[],
-        count:number
-      } },
+      details: {} as {
+        [key: string]: {
+          dishes: string[];
+          count: number;
+        };
+      },
     };
 
     items.forEach((item) => {
       // console.log(item);
       const dishesArray = Object.values(item.dishes) as string[];
-      const filteredDishes = dishesArray.filter((dish: string) => dish.trim() !== "");
+      const filteredDishes = dishesArray.filter(
+        (dish: string) => dish.trim() !== ""
+      );
 
-      orderObject.details[item.label] ={
+      orderObject.details[item.label] = {
         dishes: filteredDishes,
-        count:item.count
-      } 
-      
+        count: item.count,
+      };
     });
 
     // console.log(orderObject);
-    dispatch(setOrder(orderObject))
+    dispatch(setOrder(orderObject));
     // console.log(formState);
   };
 

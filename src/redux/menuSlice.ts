@@ -4,44 +4,43 @@ import moment from "moment";
 
 const initialState: IDalyMenu = {
   menu1: {
-    firstDish:{
-      meal:"",
-      image:"",
-    } ,
+    firstDish: {
+      meal: "",
+      image: "",
+    },
     secondDish: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
     sideDish: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
     salad: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
     bread: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
   },
   menu2: {
     mainDish: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
     dessert: {
-      meal:"",
-      image:"",
-    } ,
+      meal: "",
+      image: "",
+    },
   },
   bigDessert: {
-    nameDessert:{
-       meal:"",
-      image:"",
-    }
-     
-    } ,
+    nameDessert: {
+      meal: "",
+      image: "",
+    },
+  },
   date: "",
   _id: "",
 };
@@ -50,12 +49,16 @@ const menuSlice = createSlice({
   name: "dalyMenu",
   initialState,
   reducers: {
-    getDalyMenu: (state, action:PayloadAction<IDalyMenu>) => {
+    getDalyMenu: (state, action: PayloadAction<IDalyMenu>) => {
       // console.log(action.payload)
       return { ...state, ...action.payload };
     },
 
-    changeDalyMenu: (state, action:PayloadAction<IChangeMenu>) => {
+    getDateMenu: (state, action: PayloadAction<IDalyMenu>) => {
+      state.date = action.payload.date;
+    },
+
+    changeDalyMenu: (state, action: PayloadAction<IChangeMenu>) => {
       // console.log(action.payload)
       state.bigDessert.nameDessert.meal = action.payload.bigDessert;
       state.menu1.firstDish.meal = action.payload.firstDish;
@@ -66,9 +69,8 @@ const menuSlice = createSlice({
       state.menu2.dessert.meal = action.payload.dessert;
       state.date = moment().format("DD.MM.YYYY");
     },
-   
   },
 });
 
-export const { getDalyMenu, changeDalyMenu } = menuSlice.actions;
+export const { getDalyMenu, changeDalyMenu, getDateMenu } = menuSlice.actions;
 export default menuSlice.reducer;
