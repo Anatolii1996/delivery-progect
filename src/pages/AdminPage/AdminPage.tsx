@@ -6,6 +6,7 @@ import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
 import { changeDalyMenu } from "../../redux/menuSlice";
 import "./adminPage.scss";
+import DeliveryMap from "../DeliveryMap/DeliveryMap";
 
 const AdminPage: FC = () => {
   const currentDate = useContext(CurrentDateContext);
@@ -58,6 +59,9 @@ const AdminPage: FC = () => {
 
   return (
     <div className="admin_wrap">
+      {isToday?<>
+      <DeliveryMap/>
+      </>:<>
       <h2>Будь-ласка оберіть меню на {currentDate}!</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -213,6 +217,8 @@ const AdminPage: FC = () => {
           Відправити
         </button>
       </form>
+      </>}
+      
     </div>
   );
 };
