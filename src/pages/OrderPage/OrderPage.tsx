@@ -9,12 +9,22 @@ import { setOrder, resetState } from "../../redux/orderSlice";
 
 import MenuItem from "../../components/MenuItem/MenuItem";
 import OrderItem from "../../components/OrderItem/OrderItem";
+
+import { Button, message, Space } from 'antd';
 import "./orderPage.scss";
 
 const OrderPage: FC = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
   const isSuccess = useAppSelector((state) => state.order.success);
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Замовлення успішно відправлено',
+    });
+  };
 
   useEffect(() => {
     dispatch(getPossibleOrder());
@@ -94,6 +104,7 @@ const OrderPage: FC = () => {
         price: 0,
       });
       dispatch(resetState())
+      success()
     }
   }, [isSuccess]);
 
@@ -288,6 +299,7 @@ const OrderPage: FC = () => {
     <div className="order_wrap">
       {dalyMenu && (
         <>
+        {contextHolder}
           <form onSubmit={handleSubmit(onSubmit)}>
             <MenuItem
               object={dalyMenu.menu1}
