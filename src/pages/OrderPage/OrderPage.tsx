@@ -14,6 +14,7 @@ import "./orderPage.scss";
 const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
+  const isSuccess = useAppSelector((state) => state.order.success);
 
   useEffect(() => {
     dispatch(getPossibleOrder());
@@ -54,6 +55,46 @@ const OrderPage: FC = () => {
     comment: "",
     price: 0,
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setFormState({
+        firstMenu: {
+          dishes: {
+            firstDish: "",
+            secondDish: "",
+            sideDish: "",
+            salad: "",
+            bread: "",
+          },
+          label: "Меню1",
+          isChecked: false,
+          count: 0,
+        },
+        secondMenu: {
+          dishes: {
+            mainDish: "",
+            dessert: "",
+          },
+          label: "Меню2",
+          isChecked: false,
+          count: 0,
+        },
+        bigDessert: {
+          dishes: {
+            meal: "",
+          },
+          label: "Десерт",
+          isChecked: false,
+          count: 0,
+        },
+        address: "",
+        tel: "",
+        comment: "",
+        price: 0,
+      });
+    }
+  }, [isSuccess]);
 
   const infoClasses = {
     address: cn({
