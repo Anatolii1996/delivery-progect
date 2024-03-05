@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
-import { setOrder } from "../../redux/orderSlice";
+import { setOrder, resetState } from "../../redux/orderSlice";
 
 import MenuItem from "../../components/MenuItem/MenuItem";
 import OrderItem from "../../components/OrderItem/OrderItem";
@@ -93,6 +93,7 @@ const OrderPage: FC = () => {
         comment: "",
         price: 0,
       });
+      dispatch(resetState())
     }
   }, [isSuccess]);
 

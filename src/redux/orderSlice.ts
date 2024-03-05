@@ -15,13 +15,13 @@ const orderSlice = createSlice({
     orderSuccess: (state, action:PayloadAction<undefined>) => {
       state.success = true;
     },
-    resetForm: (state, action:PayloadAction<undefined> )=>{
+    resetState: (state, action:PayloadAction<undefined> )=>{
       state.success = false;
     }
   },
 });
 
-export const { setOrder, orderSuccess, resetForm } = orderSlice.actions;
+export const { setOrder, orderSuccess, resetState } = orderSlice.actions;
 export default orderSlice.reducer;
 
 export const GET_DALY_MENY = "orderSlice/getPossibleOrder";
