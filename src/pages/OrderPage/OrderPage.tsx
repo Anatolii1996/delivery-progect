@@ -163,14 +163,14 @@ const OrderPage: FC = () => {
         message: "* Мінімальна довжина 10 символів",
       };
     }
-   
+
     if (!values.tel) {
       errors.tel = {
         type: "required",
         message: "* Це поле обов'язкове",
       };
     }
-    
+
     if (values.comment.length > 200) {
       errors.comment = {
         message: "* Максимальна довжина 200 символів",
