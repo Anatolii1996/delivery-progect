@@ -3,9 +3,8 @@ import { FC, useEffect, useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { FormState, ErrorValues } from "./types";
 
-import cn from "classnames";
-import moment from "moment";
 import { message } from "antd";
+import moment from "moment";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
@@ -13,14 +12,15 @@ import { setOrder, resetState } from "../../redux/orderSlice";
 
 import MenuItem from "../../components/MenuItem/MenuItem";
 import OrderItem from "../../components/OrderItem/OrderItem";
+import UserBox from "../../components/UserBox/UserBox";
 
 import "./orderPage.scss";
 
 const OrderPage: FC = () => {
-  const [messageApi, contextHolder] = message.useMessage();
   const [currentTime, setCurrentTime] = useState<string>(
     moment().format("HH:mm")
   );
+  const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
   const isSuccess = useAppSelector((state) => state.order.success);
@@ -66,14 +66,13 @@ const OrderPage: FC = () => {
 
   useEffect(() => {
     dispatch(getPossibleOrder());
-
     const interval = setInterval(() => {
       setCurrentTime(moment().format("HH:mm"));
     }, 60000);
 
     return () => clearInterval(interval);
   }, []);
-  
+
   useEffect(() => {
     setFormState((prev) => {
       return {
@@ -154,8 +153,8 @@ const OrderPage: FC = () => {
       dispatch(resetState());
       success();
     }
-  }, [isSuccess]); 
-  
+  }, [isSuccess]);
+
   useEffect(() => {
     calculatePrice();
   }, [
@@ -165,6 +164,50 @@ const OrderPage: FC = () => {
     formState.firstMenu.dishes.firstDish,
     formState.firstMenu.dishes.salad,
   ]);
+
+  const onSubmit: SubmitHandler<FormState> = () => {
+    // Здесь вы можете выполнить действия с данными формы
+    const items = Object.values(formState).filter((item) => item.count > 0);
+
+    // console.log(items);
+    const orderObject = {
+      tel: formState.tel,
+      address: formState.address,
+      price: formState.price,
+      details: {} as {
+        [key: string]: {
+          dishes: string[];
+          count: number;
+        };
+      },
+    };
+
+    items.forEach((item) => {
+      // console.log(item);
+      const dishesArray = Object.values(item.dishes) as string[];
+      const filteredDishes = dishesArray.filter(
+        (dish: string) => dish.trim() !== ""
+      );
+
+      orderObject.details[item.label] = {
+        dishes: filteredDishes,
+        count: item.count,
+      };
+    });
+
+    // console.log(orderObject);
+    dispatch(setOrder(orderObject));
+    // console.log(formState);
+  };
+
+  const handleFormChange = <T extends HTMLInputElement>(
+    e: React.ChangeEvent<T>
+  ) => {
+    setFormState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const resolver: Resolver<FormState> = async (values) => {
     const errors: Partial<ErrorValues> = {};
@@ -226,50 +269,6 @@ const OrderPage: FC = () => {
     };
   };
 
-  const onSubmit: SubmitHandler<FormState> = () => {
-    // Здесь вы можете выполнить действия с данными формы
-    const items = Object.values(formState).filter((item) => item.count > 0);
-
-    // console.log(items);
-    const orderObject = {
-      tel: formState.tel,
-      address: formState.address,
-      price: formState.price,
-      details: {} as {
-        [key: string]: {
-          dishes: string[];
-          count: number;
-        };
-      },
-    };
-
-    items.forEach((item) => {
-      // console.log(item);
-      const dishesArray = Object.values(item.dishes) as string[];
-      const filteredDishes = dishesArray.filter(
-        (dish: string) => dish.trim() !== ""
-      );
-
-      orderObject.details[item.label] = {
-        dishes: filteredDishes,
-        count: item.count,
-      };
-    });
-
-    // console.log(orderObject);
-    dispatch(setOrder(orderObject));
-    // console.log(formState);
-  };
-
-  const handleFormChange = <T extends HTMLInputElement>(
-    e: React.ChangeEvent<T>
-  ) => {
-    setFormState((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const {
     register,
     handleSubmit,
@@ -295,18 +294,6 @@ const OrderPage: FC = () => {
       ...prevFormState,
       price: totalPrice,
     }));
-  };
-
-  const infoClasses = {
-    address: cn({
-      info: formState.address,
-    }),
-    tel: cn({
-      info: formState.tel,
-    }),
-    comment: cn({
-      info: formState.comment,
-    }),
   };
 
   const success = () => {
@@ -396,47 +383,36 @@ const OrderPage: FC = () => {
                 <h3>Вартість:</h3>
                 <p>{formState.price} грн</p>
               </div>
+              <UserBox
+                label={"address"}
+                formState={formState}
+                setFormState={setFormState}
+                note={"*Адреса доставки"}
+                handleFormChange={handleFormChange}
+                register={register}
+                errors={errors}
+              />
 
-              <div className="user_box">
-                <input
-                  type="text"
-                  autoComplete="off"
-                  className="input"
-                  {...register("address")}
-                  value={formState.address}
-                  onChange={handleFormChange}
-                />
-                <label className={infoClasses.address}>*Адреса доставки</label>
-                <p>{errors.address?.message}</p>
-              </div>
+              <UserBox
+                label={"tel"}
+                formState={formState}
+                setFormState={setFormState}
+                note={"*Номер телефону"}
+                handleFormChange={handleFormChange}
+                register={register}
+                errors={errors}
+              />
 
-              <div className="user_box">
-                <input
-                  type="text"
-                  autoComplete="off"
-                  className="input"
-                  {...register("tel")}
-                  value={formState.tel}
-                  onChange={handleFormChange}
-                />
-                <label className={infoClasses.tel}>*Номер телефону</label>
-                <p>{errors.tel?.message}</p>
-              </div>
-              
-              <div className="user_box">
-                <input
-                  type="text"
-                  autoComplete="off"
-                  className="input"
-                  {...register("comment")}
-                  value={formState.comment}
-                  onChange={handleFormChange}
-                />
-                <label className={infoClasses.comment}>
-                  Коментар до замовлення
-                </label>
-                <p>{errors.comment?.message}</p>
-              </div>
+              <UserBox
+                label={"comment"}
+                formState={formState}
+                setFormState={setFormState}
+                note={"Коментар до замовлення"}
+                handleFormChange={handleFormChange}
+                register={register}
+                errors={errors}
+              />
+
               <button className="submit">Відправити</button>
             </div>
           </form>
