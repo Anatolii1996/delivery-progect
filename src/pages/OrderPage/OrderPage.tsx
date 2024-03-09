@@ -352,7 +352,7 @@ const OrderPage: FC = () => {
                     value="Готівкою"
                     checked={isCash}
                     disabled={isCash}
-                    onClick={() => {
+                    onChange={() => {
                       setIsCard(!isCard);
                       setIsCash(!isCash);
                     }}
@@ -368,7 +368,7 @@ const OrderPage: FC = () => {
                     value="Картою"
                     checked={isCard}
                     disabled={isCard}
-                    onClick={() => {
+                    onChange={() => {
                       setIsCard(!isCard);
                       setIsCash(!isCash);
                     }}
@@ -422,6 +422,7 @@ const OrderPage: FC = () => {
                 <label className={infoClasses.tel}>*Номер телефону</label>
                 <p>{errors.tel?.message}</p>
               </div>
+              
               <div className="user_box">
                 <input
                   type="text"
