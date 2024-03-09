@@ -1,7 +1,11 @@
 import { FC, useEffect, useState } from "react";
+
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { FormState, ErrorValues } from "./types";
+
 import cn from "classnames";
+import moment from "moment";
+import { message } from "antd";
 
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { getPossibleOrder } from "../../redux/orderSlice";
@@ -10,28 +14,19 @@ import { setOrder, resetState } from "../../redux/orderSlice";
 import MenuItem from "../../components/MenuItem/MenuItem";
 import OrderItem from "../../components/OrderItem/OrderItem";
 
-import { Button, message, Space } from "antd";
 import "./orderPage.scss";
 
 const OrderPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [currentTime, setCurrentTime] = useState<string>(
+    moment().format("HH:mm")
+  );
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
   const isSuccess = useAppSelector((state) => state.order.success);
 
   const [isCash, setIsCash] = useState(true);
   const [isCard, setIsCard] = useState(false);
-
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "Замовлення успішно відправлено",
-    });
-  };
-
-  useEffect(() => {
-    dispatch(getPossibleOrder());
-  }, []);
 
   const [formState, setFormState] = useState<FormState>({
     firstMenu: {
@@ -68,6 +63,56 @@ const OrderPage: FC = () => {
     comment: "",
     price: 0,
   });
+
+  useEffect(() => {
+    dispatch(getPossibleOrder());
+
+    const interval = setInterval(() => {
+      setCurrentTime(moment().format("HH:mm"));
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
+  useEffect(() => {
+    setFormState((prev) => {
+      return {
+        firstMenu: {
+          dishes: {
+            firstDish: dalyMenu.menu1.firstDish.meal,
+            secondDish: dalyMenu.menu1.secondDish.meal,
+            sideDish: dalyMenu.menu1.sideDish.meal,
+            salad: dalyMenu.menu1.salad.meal,
+            bread: dalyMenu.menu1.bread.meal,
+          },
+          label: prev.firstMenu.label,
+          isChecked: prev.firstMenu.isChecked,
+          count: prev.firstMenu.count,
+        },
+        secondMenu: {
+          dishes: {
+            mainDish: dalyMenu.menu2.mainDish.meal,
+            dessert: dalyMenu.menu2.dessert.meal,
+          },
+          label: prev.secondMenu.label,
+          isChecked: prev.secondMenu.isChecked,
+          count: prev.secondMenu.count,
+        },
+        bigDessert: {
+          dishes: {
+            meal: dalyMenu.bigDessert.nameDessert.meal,
+          },
+          label: prev.bigDessert.label,
+          isChecked: prev.bigDessert.isChecked,
+          count: prev.bigDessert.count,
+        },
+        address: prev.address,
+        tel: prev.tel,
+        comment: prev.comment,
+        price: prev.price,
+      };
+    });
+  }, [dalyMenu]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -109,81 +154,8 @@ const OrderPage: FC = () => {
       dispatch(resetState());
       success();
     }
-  }, [isSuccess]);
-
-  const infoClasses = {
-    address: cn({
-      info: formState.address,
-    }),
-    tel: cn({
-      info: formState.tel,
-    }),
-    comment: cn({
-      info: formState.comment,
-    }),
-  };
-
-  useEffect(() => {
-    setFormState((prev) => {
-      return {
-        firstMenu: {
-          dishes: {
-            firstDish: dalyMenu.menu1.firstDish.meal,
-            secondDish: dalyMenu.menu1.secondDish.meal,
-            sideDish: dalyMenu.menu1.sideDish.meal,
-            salad: dalyMenu.menu1.salad.meal,
-            bread: dalyMenu.menu1.bread.meal,
-          },
-          label: prev.firstMenu.label,
-          isChecked: prev.firstMenu.isChecked,
-          count: prev.firstMenu.count,
-        },
-        secondMenu: {
-          dishes: {
-            mainDish: dalyMenu.menu2.mainDish.meal,
-            dessert: dalyMenu.menu2.dessert.meal,
-          },
-          label: prev.secondMenu.label,
-          isChecked: prev.secondMenu.isChecked,
-          count: prev.secondMenu.count,
-        },
-        bigDessert: {
-          dishes: {
-            meal: dalyMenu.bigDessert.nameDessert.meal,
-          },
-          label: prev.bigDessert.label,
-          isChecked: prev.bigDessert.isChecked,
-          count: prev.bigDessert.count,
-        },
-        address: prev.address,
-        tel: prev.tel,
-        comment: prev.comment,
-        price: prev.price,
-      };
-    });
-  }, [dalyMenu]);
-
-  const calculatePrice = () => {
-    let firstMenuPrice = 115 * formState.firstMenu.count;
-
-    if (
-      !formState.firstMenu.dishes.firstDish ||
-      !formState.firstMenu.dishes.salad
-    ) {
-      firstMenuPrice = 95 * formState.firstMenu.count;
-    }
-
-    const secondMenuPrice = 149 * formState.secondMenu.count;
-    const bigDessertPrice = 39 * formState.bigDessert.count;
-
-    const totalPrice = firstMenuPrice + secondMenuPrice + bigDessertPrice;
-
-    setFormState((prevFormState) => ({
-      ...prevFormState,
-      price: totalPrice,
-    }));
-  };
-
+  }, [isSuccess]); 
+  
   useEffect(() => {
     calculatePrice();
   }, [
@@ -242,6 +214,12 @@ const OrderPage: FC = () => {
       };
     }
 
+    if (currentTime > "10:30") {
+      errors.comment = {
+        message: "Замовлення приймаються до 10:30. Чекаємо на Вас завтра!",
+      };
+    }
+
     return {
       values: values,
       errors: errors,
@@ -297,6 +275,46 @@ const OrderPage: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormState>({ resolver });
+
+  const calculatePrice = () => {
+    let firstMenuPrice = 115 * formState.firstMenu.count;
+
+    if (
+      !formState.firstMenu.dishes.firstDish ||
+      !formState.firstMenu.dishes.salad
+    ) {
+      firstMenuPrice = 95 * formState.firstMenu.count;
+    }
+
+    const secondMenuPrice = 149 * formState.secondMenu.count;
+    const bigDessertPrice = 39 * formState.bigDessert.count;
+
+    const totalPrice = firstMenuPrice + secondMenuPrice + bigDessertPrice;
+
+    setFormState((prevFormState) => ({
+      ...prevFormState,
+      price: totalPrice,
+    }));
+  };
+
+  const infoClasses = {
+    address: cn({
+      info: formState.address,
+    }),
+    tel: cn({
+      info: formState.tel,
+    }),
+    comment: cn({
+      info: formState.comment,
+    }),
+  };
+
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Замовлення успішно відправлено",
+    });
+  };
 
   return (
     <div className="order_wrap">
