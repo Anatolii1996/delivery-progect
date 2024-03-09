@@ -10,7 +10,7 @@ import { setOrder, resetState } from "../../redux/orderSlice";
 import MenuItem from "../../components/MenuItem/MenuItem";
 import OrderItem from "../../components/OrderItem/OrderItem";
 
-import { Button, message, Space } from 'antd';
+import { Button, message, Space } from "antd";
 import "./orderPage.scss";
 
 const OrderPage: FC = () => {
@@ -19,10 +19,13 @@ const OrderPage: FC = () => {
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
   const isSuccess = useAppSelector((state) => state.order.success);
 
+  const [isCash, setIsCash] = useState(true);
+  const [isCard, setIsCard] = useState(false);
+
   const success = () => {
     messageApi.open({
-      type: 'success',
-      content: 'Замовлення успішно відправлено',
+      type: "success",
+      content: "Замовлення успішно відправлено",
     });
   };
 
@@ -103,8 +106,8 @@ const OrderPage: FC = () => {
         comment: "",
         price: 0,
       });
-      dispatch(resetState())
-      success()
+      dispatch(resetState());
+      success();
     }
   }, [isSuccess]);
 
@@ -299,7 +302,7 @@ const OrderPage: FC = () => {
     <div className="order_wrap">
       {dalyMenu && (
         <>
-        {contextHolder}
+          {contextHolder}
           <form onSubmit={handleSubmit(onSubmit)}>
             <MenuItem
               object={dalyMenu.menu1}
@@ -321,6 +324,48 @@ const OrderPage: FC = () => {
                 setFormState={setFormState}
                 menuLabel={"Десерт"}
               />
+
+              <div className="wrapper">
+                <h2>Оплата:</h2>
+                <div className="option">
+                  <input
+                    className="input"
+                    type="radio"
+                    value="Готівкою"
+                    checked={isCash}
+                    disabled={isCash}
+                    onClick={() => {
+                      setIsCard(!isCard);
+                      setIsCash(!isCash);
+                    }}
+                  />
+                  <div className="btn">
+                    <span className="span">Готівкою</span>
+                  </div>
+                </div>
+                <div className="option">
+                  <input
+                    className="input"
+                    type="radio"
+                    value="Картою"
+                    checked={isCard}
+                    disabled={isCard}
+                    onClick={() => {
+                      setIsCard(!isCard);
+                      setIsCash(!isCash);
+                    }}
+                  />
+                  <div className="btn">
+                    <span className="span">Картою</span>
+                  </div>{" "}
+                </div>
+              </div>
+              {isCard && (
+                <div className="cardNumber">
+                  <h3>Номер карти</h3>
+                  <p>0000 0000 0000 0000</p>
+                </div>
+              )}
             </div>
 
             <div className="form_order">
