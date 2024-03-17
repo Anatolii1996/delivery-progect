@@ -1,12 +1,17 @@
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
-import { createUser } from "../../redux/userSlice";
+import { createUser, removeUserStatus } from "../../redux/userSlice";
 import cn from "classnames";
+import { message } from "antd";
 import "./register.scss";
 
 const RegisterPage: FC = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+  const dispatch = useAppDispatch();
+  const userStatus = useAppSelector((state) => state.createUser.status);
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -15,7 +20,14 @@ const RegisterPage: FC = () => {
     address: "",
   });
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (userStatus) {
+      success();
+      setTimeout(() => {
+        dispatch(removeUserStatus());
+      }, 1500);
+    }
+  }, [userStatus]);
 
   const resolver: Resolver<FormValues> = async (values) => {
     const errors: Partial<ErrorValues> = {};
@@ -142,8 +154,16 @@ const RegisterPage: FC = () => {
     }),
   };
 
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Користувач успішно створений",
+    });
+  };
+
   return (
     <div className="register_wrap">
+      {contextHolder}
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <p className="title">Реєстрація</p>
 

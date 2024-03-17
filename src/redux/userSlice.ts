@@ -21,9 +21,13 @@ const userSlice = createSlice({
       state.status = false;
       console.error("Create user failed:", action.payload);
     },
+    removeUserStatus: (state) => {
+      state.status = undefined;
+    }
+
   },
 });
 
-export const { createUser, createUserSuccess, createUserFailure } =
+export const { createUser, createUserSuccess, createUserFailure, removeUserStatus } =
   userSlice.actions;
 export default userSlice.reducer;
