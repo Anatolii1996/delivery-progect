@@ -6,7 +6,7 @@ import { FormValues } from "./types";
 import { getDishes } from "../../redux/dishesSlice";
 import { changeDalyMenu } from "../../redux/menuSlice";
 import "./adminPage.scss";
-import DeliveryMap from "../DeliveryMap/DeliveryMap";
+import DeliveryMap from "../OrdersTable/OrdersTable";
 
 const AdminPage: FC = () => {
   const currentDate = useContext(CurrentDateContext);
