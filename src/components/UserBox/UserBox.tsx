@@ -1,8 +1,6 @@
 import { FC } from "react";
-// import { useForm, Resolver } from "react-hook-form";
 import { UserBoxProps } from "./type";
 import cn from "classnames";
-import moment from "moment";
 
 const UserBox: FC<UserBoxProps> = ({
   label,
