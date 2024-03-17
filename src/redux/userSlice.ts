@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserMessage, IUserState } from "./types";
 
 const initialState: IUserMessage = {
-  message: "",
+  status: undefined,
 };
 
 const userSlice = createSlice({
@@ -14,11 +14,11 @@ const userSlice = createSlice({
     },
     createUserSuccess: (state) => {
       // Этот экшн вызывается в саге при успешной отправке данных на бекенд
-      state.message = "Користувач успішно створений";
+      state.status = true;
     },
     createUserFailure: (state, action:PayloadAction<string>) => {
       // Этот экшн вызывается в саге в случае ошибки при отправке данных на бекенд
-      state.message = "Нажаль користувач не створений";
+      state.status = false;
       console.error("Create user failed:", action.payload);
     },
   },

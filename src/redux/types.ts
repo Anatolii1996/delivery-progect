@@ -1,5 +1,5 @@
 export interface IUserMessage {
-  message: string;
+  status: boolean|undefined;
 }
 
 export interface IUserState {
