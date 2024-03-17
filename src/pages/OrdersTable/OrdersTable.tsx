@@ -1,5 +1,7 @@
-import { FC } from "react";
-import { Space, Table, Tag } from "antd";
+import { FC, useEffect } from "react";
+import { useAppDispatch } from "../../hooks";
+import { getDalyOrders } from "../../redux/dalyOrdersSlice";
+import { Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { IOrderType } from "./types";
 
@@ -20,7 +22,7 @@ const columns: TableProps<IOrderType>["columns"] = [
     title: "Адреса",
     dataIndex: "address",
   },
- 
+
   {
     title: "Тел.",
     dataIndex: "tel",
@@ -34,31 +36,37 @@ const columns: TableProps<IOrderType>["columns"] = [
 const data: IOrderType[] = [
   {
     key: "1",
-    number:1,
+    number: 1,
     name: "John Brown",
     address: "New York No. 1 Lake Park",
-    tel:"000",
-    price:12
+    tel: "000",
+    price: 12,
   },
   {
     key: "2",
-    number:2,
+    number: 2,
     name: "Jim Green",
     address: "London No. 1 Lake Park",
-    tel:"000",
-    price:12
+    tel: "000",
+    price: 12,
   },
   {
     key: "3",
-    number:3,
+    number: 3,
     name: "Joe Black",
     address: "Sydney No. 1 Lake Park",
-    tel:"000",
-    price:12
+    tel: "000",
+    price: 12,
   },
 ];
 
 const OrdersTable: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getDalyOrders());
+  }, []);
+
   return <Table columns={columns} dataSource={data} />;
 };
 

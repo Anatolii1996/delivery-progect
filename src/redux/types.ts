@@ -93,3 +93,25 @@ export interface IOrder {
     };
   };
 }
+
+export interface IOrderState{
+  _id: string;
+  tel: string;
+  address: string;
+  price: number;
+  date: string;
+  details: {
+    Меню1?: {
+      count: number,
+      dishes: string[]
+    },
+    Меню2?: {
+      count: number,
+      dishes: string[],
+    },
+    Десерт?: {
+      count: number,
+      dishes: string[]
+    }
+  }
+}

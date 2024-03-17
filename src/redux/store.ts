@@ -5,6 +5,7 @@ import userReducer from "./userSlice";
 import dishesReducer from "./dishesSlice";
 import dalyMenuReducer from "./menuSlice";
 import orderReducer from "./orderSlice";
+import dalyOrdersReducer from "./dalyOrdersSlice";
 
 import rootSaga from "../sagas";
 
@@ -15,7 +16,8 @@ const store = configureStore({
     createUser: userReducer,
     menu: dishesReducer,
     dalyMenu: dalyMenuReducer,
-    order: orderReducer
+    order: orderReducer,
+    dalyOrders: dalyOrdersReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
