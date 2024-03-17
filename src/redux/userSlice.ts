@@ -12,7 +12,7 @@ const userSlice = createSlice({
     createUser: (state, action:PayloadAction<IUserState>) => {
       // Этот экшн вызывается из компонента для начала процесса создания пользователя
     },
-    createUserSuccess: (state) => {
+    createUserSuccess: (state, action:PayloadAction<undefined>) => {
       // Этот экшн вызывается в саге при успешной отправке данных на бекенд
       state.status = true;
     },

@@ -6,7 +6,7 @@ const dalyOrdersSlice = createSlice({
   name: "dalyOrders",
   initialState,
   reducers: {
-    getDalyOrders: (state) => {
+    getDalyOrders: (state, action:PayloadAction<undefined>) => {
       // Этот экшн вызывается из компонента для начала процесса создания пользователя
     },
    createDalyOrders: (state, action:PayloadAction<IOrderState[]>) => {
