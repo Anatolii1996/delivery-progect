@@ -8,10 +8,10 @@
 // }
 
 export interface IOrderType {
-    number: number;
-    key: string;
-    name: string;
-    address: string;
-    tel: string;
-    price: number;
-  }
+  number: number;
+  key: string;
+  body:any[];
+  address: string;
+  tel: string;
+  price: number;
+}

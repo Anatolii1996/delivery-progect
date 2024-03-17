@@ -1,5 +1,6 @@
 import { useState, FC, useEffect } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
 import { createUser, removeUserStatus } from "../../redux/userSlice";
@@ -10,6 +11,7 @@ import "./register.scss";
 const RegisterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userStatus = useAppSelector((state) => state.createUser.status);
 
   const [formState, setFormState] = useState({
@@ -25,6 +27,7 @@ const RegisterPage: FC = () => {
       success();
       setTimeout(() => {
         dispatch(removeUserStatus());
+        navigate("/f/order")
       }, 1500);
     }
   }, [userStatus]);

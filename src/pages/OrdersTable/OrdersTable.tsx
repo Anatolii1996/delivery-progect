@@ -1,22 +1,38 @@
-import { FC, useEffect } from "react";
-import { useAppDispatch } from "../../hooks";
+import { FC, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getDalyOrders } from "../../redux/dalyOrdersSlice";
-import { Space, Table } from "antd";
+import { Table, ConfigProvider } from "antd";
 import type { TableProps } from "antd";
 import { IOrderType } from "./types";
+import "./orderTable.scss";
 
 const columns: TableProps<IOrderType>["columns"] = [
   {
     title: "№",
     dataIndex: "number",
   },
-  {
-    title: "Ім'я",
-    dataIndex: "name",
-  },
+
   {
     title: "Замовлення",
-    dataIndex: "order",
+    dataIndex: "body",
+    render: (body: string[]) => (
+      <div>
+        {body.map((item, index) => {
+          const title = item.split(":")[0];
+          const count = item.split(":")[1].split(",")[1]; // Получаем только часть до ":"
+          const body = item.split(":")[1].split(",").slice(3).join(","); // Получаем только часть до ":"
+          return (
+            <div key={index}>
+              <div className="order_header">
+                <div>{title.trim()}</div>
+                <div>Кількість: {count.trim()}</div>
+              </div>
+              <div>{body}</div>
+            </div>
+          );
+        })}
+      </div>
+    ),
   },
   {
     title: "Адреса",
@@ -33,41 +49,50 @@ const columns: TableProps<IOrderType>["columns"] = [
   },
 ];
 
-const data: IOrderType[] = [
-  {
-    key: "1",
-    number: 1,
-    name: "John Brown",
-    address: "New York No. 1 Lake Park",
-    tel: "000",
-    price: 12,
-  },
-  {
-    key: "2",
-    number: 2,
-    name: "Jim Green",
-    address: "London No. 1 Lake Park",
-    tel: "000",
-    price: 12,
-  },
-  {
-    key: "3",
-    number: 3,
-    name: "Joe Black",
-    address: "Sydney No. 1 Lake Park",
-    tel: "000",
-    price: 12,
-  },
-];
-
 const OrdersTable: FC = () => {
   const dispatch = useAppDispatch();
+
+  const dalyOrders = useAppSelector((state) => state.dalyOrders);
+  const [data, setData] = useState<IOrderType[]>([]);
 
   useEffect(() => {
     dispatch(getDalyOrders());
   }, []);
 
-  return <Table columns={columns} dataSource={data} />;
+  useEffect(() => {
+    setDalyOrders();
+  }, [dalyOrders]);
+
+  const setDalyOrders = () => {
+    const newData = dalyOrders.map((order, index) => ({
+      key: `${index}`,
+      number: index + 1,
+      address: order.address,
+      body: Object.entries(order.details).map(
+        ([key, value]) => `${key}: ${Object.entries(value)}`
+      ),
+      tel: order.tel,
+      price: order.price,
+    }));
+    setData(newData);
+  };
+
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Table: {
+            headerBg: "#7e7575",
+            borderColor:"#1b1b1b",
+            rowHoverBg:"#a6e3aa",
+            
+          },
+        },
+      }}
+    >
+      <Table columns={columns} dataSource={data} />
+    </ConfigProvider>
+  );
 };
 
 export default OrdersTable;
