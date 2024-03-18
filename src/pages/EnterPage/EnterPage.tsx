@@ -4,7 +4,7 @@ import { FormValues, ErrorValues } from "./types";
 
 import { message } from "antd";
 import cn from "classnames";
-import "./enter.scss"
+import "./enter.scss";
 
 const EnterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -63,13 +63,29 @@ const EnterPage: FC = () => {
     }),
   };
 
+  const handleFormChange = <T extends HTMLInputElement>(
+    e: React.ChangeEvent<T>
+  ) => {
+    setFormState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    // Здесь вы можете выполнить действия с данными формы
+    // dispatch(createUser(data));
+console.log(data)
+    setFormState({
+      email: "",
+      password: "",
+    });
+  };
+
   return (
     <div className="enter_wrap">
       {contextHolder}
-      <form
-        className="form"
-        //    onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <p className="title">Вхід</p>
 
         <div className="user_box">
@@ -77,15 +93,11 @@ const EnterPage: FC = () => {
             type="email"
             autoComplete="off"
             className="input"
-            // {...register("email")}
-            // value={formState.email}
-            // onChange={handleFormChange}
+            {...register("email")}
+            value={formState.email}
+            onChange={handleFormChange}
           />
-          <label
-            className={infoClasses.email}
-          >
-            *Email
-          </label>
+          <label className={infoClasses.email}>*Email</label>
           <p>{errors.email?.message}</p>
         </div>
 
@@ -94,15 +106,11 @@ const EnterPage: FC = () => {
             autoComplete="off"
             type="password"
             className="input"
-            // {...register("password")}
-            // value={formState.password}
-            // onChange={handleFormChange}
+            {...register("password")}
+            value={formState.password}
+            onChange={handleFormChange}
           />
-          <label
-            className={infoClasses.password}
-          >
-            *Пароль
-          </label>
+          <label className={infoClasses.password}>*Пароль</label>
           <p>{errors.password?.message}</p>
         </div>
 
