@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
+import EnterPage from "./pages/EnterPage/EnterPage";
 // import AddImage from "./pages/AddImage/AddImage";
 import moment from "moment";
 import "animate.css";
@@ -20,6 +21,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/enter" element={<EnterPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/f" element={<Footer />}>
           <Route path="/f/order" element={<OrderPage />} />
