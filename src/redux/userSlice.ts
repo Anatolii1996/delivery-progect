@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserMessage, IUserState } from "./types";
+import { FormValues } from "../pages/EnterPage/types";
 
 const initialState: IUserMessage = {
   status: undefined,
@@ -23,11 +24,14 @@ const userSlice = createSlice({
     },
     removeUserStatus: (state) => {
       state.status = undefined;
+    },
+    loginUser: (state, action:PayloadAction<FormValues>) => {
+
     }
 
   },
 });
 
-export const { createUser, createUserSuccess, createUserFailure, removeUserStatus } =
+export const { createUser, createUserSuccess, createUserFailure, removeUserStatus, loginUser } =
   userSlice.actions;
 export default userSlice.reducer;

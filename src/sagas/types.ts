@@ -1,8 +1,15 @@
 import { IOrder } from "../redux/types";
+import { FormValues } from "../pages/EnterPage/types";
 
 export interface IUserAction {
   type: string;
   payload: IUserState;
+}
+
+export interface ILoginAction {
+  type: string;
+  payload: FormValues;
+
 }
 
 export interface IUserState {

@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
+import { useAppDispatch } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
+import { loginUser } from "../../redux/userSlice";
 
 import { message } from "antd";
 import cn from "classnames";
@@ -8,7 +10,7 @@ import "./enter.scss";
 
 const EnterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  const dispatch = useAppDispatch();
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -74,8 +76,8 @@ const EnterPage: FC = () => {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // Здесь вы можете выполнить действия с данными формы
-    // dispatch(createUser(data));
-console.log(data)
+    dispatch(loginUser(data));
+    console.log(data);
     setFormState({
       email: "",
       password: "",
@@ -114,7 +116,7 @@ console.log(data)
           <p>{errors.password?.message}</p>
         </div>
 
-        <button className="submit">Зареєструватись</button>
+        <button className="submit">Увійти</button>
 
         <a href="#">Забули пароль?</a>
       </form>

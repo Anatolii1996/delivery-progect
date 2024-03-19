@@ -235,7 +235,7 @@ const RegisterPage: FC = () => {
 
         <button className="submit">Зареєструватись</button>
 
-        <a href="#">Забули пароль?</a>
+       
       </form>
     </div>
   );
