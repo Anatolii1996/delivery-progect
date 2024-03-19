@@ -1,5 +1,5 @@
 import { takeEvery, put } from "redux-saga/effects";
-import { createUserSuccess, createUserFailure, addUserInfo } from "../redux/userSlice";
+import { createUserSuccess, createUserFailure, addUserInfo, addloginUserInfo } from "../redux/userSlice";
 import { IUserAction, ILoginAction } from "./types";
 import axios from "axios";
 
@@ -50,6 +50,7 @@ function* loginUserWorker(action: ILoginAction): any {
     };
     const response = yield axios(config);
     console.log(response);
+    yield put(addloginUserInfo(response.data.user))
 
     //   if (response.status === 201) {
     //     // Если успешно, диспатчим экшн createUserSuccess

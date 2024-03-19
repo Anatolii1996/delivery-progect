@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
-import { useAppDispatch } from "../../hooks";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
 import { loginUser } from "../../redux/userSlice";
 
@@ -11,6 +12,8 @@ import "./enter.scss";
 const EnterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const userName = useAppSelector((state) => state.userState.userInfo.name);
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -77,12 +80,20 @@ const EnterPage: FC = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     // Здесь вы можете выполнить действия с данными формы
     dispatch(loginUser(data));
-    console.log(data);
+    // console.log(data);
     setFormState({
       email: "",
       password: "",
     });
   };
+
+  useEffect(() => {
+    if (userName) {
+      setTimeout(() => {
+        navigate("/f/h/order")
+      }, 1000);
+    }
+  }, [userName]);
 
   return (
     <div className="enter_wrap">

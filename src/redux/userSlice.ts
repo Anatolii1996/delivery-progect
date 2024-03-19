@@ -34,11 +34,17 @@ const userSlice = createSlice({
      state.userInfo.address=action.payload.address;
      state.userInfo.tel=action.payload.tel;
 
+    },
+    addloginUserInfo: (state, action)=>{
+     state.userInfo.name=action.payload.name;
+     state.userInfo.address=action.payload.address;
+     state.userInfo.tel=action.payload.tel;
+
     }
 
   },
 });
 
-export const { createUser, createUserSuccess, createUserFailure, removeUserStatus, loginUser, addUserInfo } =
+export const { createUser, createUserSuccess, createUserFailure, removeUserStatus, loginUser, addUserInfo, addloginUserInfo } =
   userSlice.actions;
 export default userSlice.reducer;
