@@ -12,6 +12,7 @@ import moment from "moment";
 import "animate.css";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 const App = () => {
   const [toDay] = useState(moment().format("DD.MM.YYYY"));
@@ -24,7 +25,10 @@ const App = () => {
         <Route path="/enter" element={<EnterPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/f" element={<Footer />}>
-          <Route path="/f/order" element={<OrderPage />} />
+          <Route path="/f/h" element={<Header/>} >
+            <Route path="/f/h/order" element={<OrderPage />} />
+          </Route>
+          
         </Route>
 
         {/* <Route path="/add" element={<AddImage/>}/> */}

@@ -35,7 +35,7 @@ const LoginPage: FC = () => {
       
       <div className="login_main">
         <div className="guest_button">
-          <Link to="/f/order">Замовити в 2 кліки</Link>
+          <Link to="/f/h/order">Замовити в 2 кліки</Link>
         </div>
         <div className="btn-conteiner">
           <a className="btn-content" href="/register">
