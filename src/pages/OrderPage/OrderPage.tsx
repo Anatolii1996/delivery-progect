@@ -24,6 +24,10 @@ const OrderPage: FC = () => {
   const dispatch = useAppDispatch();
   const dalyMenu = useAppSelector((state) => state.dalyMenu);
   const isSuccess = useAppSelector((state) => state.order.success);
+  const userAddress = useAppSelector(
+    (state) => state.userState.userInfo.address
+  );
+  const userTel = useAppSelector((state) => state.userState.userInfo.tel);
 
   const [isCash, setIsCash] = useState(true);
   const [isCard, setIsCard] = useState(false);
@@ -72,6 +76,16 @@ const OrderPage: FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    setFormState((prev) => {
+      return {
+        ...prev,
+        address: userAddress,
+        tel: userTel,
+      };
+    });
+  }, [userAddress, userTel]);
 
   useEffect(() => {
     setFormState((prev) => {

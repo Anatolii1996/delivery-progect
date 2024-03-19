@@ -1,5 +1,10 @@
-export interface IUserMessage {
-  status: boolean|undefined;
+export interface IUserStore {
+  status: boolean | undefined;
+  userInfo: {
+    name: string;
+    tel: string;
+    address: string;
+  };
 }
 
 export interface IUserState {
@@ -81,20 +86,20 @@ export interface IOrder {
   details: {
     Меню1?: {
       count: number;
-      dishes:string[];
+      dishes: string[];
     };
     Меню2?: {
       count: number;
-      dishes:string[];
+      dishes: string[];
     };
     Десерт?: {
       count: number;
-      dishes:string[];
+      dishes: string[];
     };
   };
 }
 
-export interface IOrderState{
+export interface IOrderState {
   _id: string;
   tel: string;
   address: string;
@@ -102,16 +107,16 @@ export interface IOrderState{
   date: string;
   details: {
     Меню1?: {
-      count: number,
-      dishes: string[]
-    },
+      count: number;
+      dishes: string[];
+    };
     Меню2?: {
-      count: number,
-      dishes: string[],
-    },
+      count: number;
+      dishes: string[];
+    };
     Десерт?: {
-      count: number,
-      dishes: string[]
-    }
-  }
+      count: number;
+      dishes: string[];
+    };
+  };
 }

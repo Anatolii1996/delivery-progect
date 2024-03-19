@@ -12,7 +12,7 @@ const RegisterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userStatus = useAppSelector((state) => state.createUser.status);
+  const userStatus = useAppSelector((state) => state.userState.status);
 
   const [formState, setFormState] = useState({
     name: "",
@@ -27,7 +27,7 @@ const RegisterPage: FC = () => {
       success();
       setTimeout(() => {
         dispatch(removeUserStatus());
-        navigate("/f/order")
+        navigate("/f/h/order")
       }, 1500);
     }
   }, [userStatus]);
