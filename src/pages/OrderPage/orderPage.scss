@@ -5,12 +5,15 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    .order_windows {
+      display: flex;
+    }
 
     .form_order {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      width: min(50%, 500px);
+      width: min(90%, 500px);
       background-color: #fff;
       padding: 20px;
       border-radius: 20px;
@@ -139,11 +142,34 @@
   .input:checked + .btn .span {
     color: var(--font-color-light);
   }
-  
 }
 .cardNumber {
-    h3,
-    p {
-      text-align: center;
+  h3,
+  p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1025px) {
+  .order_wrap {
+    form {
+      flex-direction: column;
+      align-items: center;
+      .order_windows {
+        justify-content: space-between;
+        width: 100%;
+      }
     }
   }
+}
+@media (max-width: 780px) {
+  .order_wrap {
+    form {
+      .order_windows {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

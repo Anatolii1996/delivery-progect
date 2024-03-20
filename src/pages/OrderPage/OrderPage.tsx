@@ -309,68 +309,68 @@ const OrderPage: FC = () => {
         <>
           {contextHolder}
           <form onSubmit={handleSubmit(onSubmit)}>
-            <MenuItem
-              object={dalyMenu.menu1}
-              formState={formState}
-              setFormState={setFormState}
-              menuLabel={"Меню 1"}
-            />
-            <div className="twoMenus">
+            <div className="order_windows">
               <MenuItem
-                object={dalyMenu.menu2}
+                object={dalyMenu.menu1}
                 formState={formState}
                 setFormState={setFormState}
-                menuLabel={"Меню 2"}
+                menuLabel={"Меню 1"}
               />
-
-              <MenuItem
-                object={dalyMenu.bigDessert}
-                formState={formState}
-                setFormState={setFormState}
-                menuLabel={"Десерт"}
-              />
-
-              <div className="wrapper">
-                <h2>Оплата:</h2>
-                <div className="option">
-                  <input
-                    className="input"
-                    type="radio"
-                    value="Готівкою"
-                    checked={isCash}
-                    disabled={isCash}
-                    onChange={() => {
-                      setIsCard(!isCard);
-                      setIsCash(!isCash);
-                    }}
-                  />
-                  <div className="btn">
-                    <span className="span">Готівкою</span>
+              <div className="twoMenus">
+                <MenuItem
+                  object={dalyMenu.menu2}
+                  formState={formState}
+                  setFormState={setFormState}
+                  menuLabel={"Меню 2"}
+                />
+                <MenuItem
+                  object={dalyMenu.bigDessert}
+                  formState={formState}
+                  setFormState={setFormState}
+                  menuLabel={"Десерт"}
+                />
+                <div className="wrapper">
+                  <h2>Оплата:</h2>
+                  <div className="option">
+                    <input
+                      className="input"
+                      type="radio"
+                      value="Готівкою"
+                      checked={isCash}
+                      disabled={isCash}
+                      onChange={() => {
+                        setIsCard(!isCard);
+                        setIsCash(!isCash);
+                      }}
+                    />
+                    <div className="btn">
+                      <span className="span">Готівкою</span>
+                    </div>
+                  </div>
+                  <div className="option">
+                    <input
+                      className="input"
+                      type="radio"
+                      value="Картою"
+                      checked={isCard}
+                      disabled={isCard}
+                      onChange={() => {
+                        setIsCard(!isCard);
+                        setIsCash(!isCash);
+                      }}
+                    />
+                    <div className="btn">
+                      <span className="span">Картою</span>
+                    </div>{" "}
                   </div>
                 </div>
-                <div className="option">
-                  <input
-                    className="input"
-                    type="radio"
-                    value="Картою"
-                    checked={isCard}
-                    disabled={isCard}
-                    onChange={() => {
-                      setIsCard(!isCard);
-                      setIsCash(!isCash);
-                    }}
-                  />
-                  <div className="btn">
-                    <span className="span">Картою</span>
-                  </div>{" "}
-                </div>
+                {isCard && (
+                  <div className="cardNumber">
+                    <h3>Номер карти</h3>
+                    <p>0000 0000 0000 0000</p>
+                  </div>
+                )}
               </div>
-              {isCard && (
-                <div className="cardNumber">
-                  <h3>Номер карти</h3>
-                  <p>0000 0000 0000 0000</p>
-                </div>
-              )}
             </div>
 
             <div className="form_order">
