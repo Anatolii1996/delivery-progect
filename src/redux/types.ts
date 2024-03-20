@@ -4,6 +4,7 @@ export interface IUserStore {
     name: string;
     tel: string;
     address: string;
+    email: string;
   };
 }
 

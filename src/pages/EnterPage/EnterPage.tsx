@@ -13,7 +13,7 @@ const EnterPage: FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userName = useAppSelector((state) => state.userState.userInfo.name);
+  const userEmail = useAppSelector((state) => state.userState.userInfo.email);
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -88,12 +88,18 @@ const EnterPage: FC = () => {
   };
 
   useEffect(() => {
-    if (userName) {
-      setTimeout(() => {
-        navigate("/f/h/order")
-      }, 1000);
+    // console.log(import.meta.env.VITE_SERVER_URL)
+    // console.log(import.meta.env.VITE_ADMIN_EMAIL)
+    if (userEmail) {
+      if (userEmail === import.meta.env.VITE_ADMIN_EMAIL) {
+        navigate("/admin");
+      } else {
+        setTimeout(() => {
+          navigate("/f/h/order");
+        }, 1000);
+      }
     }
-  }, [userName]);
+  }, [userEmail]);
 
   return (
     <div className="enter_wrap">

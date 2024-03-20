@@ -14,10 +14,12 @@ function* createuserWorker(action: IUserAction): any {
       headers: {
         "Content-Type": "application/json",
       },
+      // withCredentials: true,
       data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
     };
     const response = yield axios(config);
     // console.log(response.data.user)
+    localStorage.setItem("token", response.data.accessToken);
     yield put(addUserInfo(response.data.user))
 
     if (response.status === 201) {
@@ -46,10 +48,12 @@ function* loginUserWorker(action: ILoginAction): any {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
       data: JSON.stringify(action.payload), // Преобразуйте данные в JSON-строку
     };
     const response = yield axios(config);
-    console.log(response);
+    // console.log(response);
+    localStorage.setItem("token", response.data.accessToken);
     yield put(addloginUserInfo(response.data.user))
 
     //   if (response.status === 201) {

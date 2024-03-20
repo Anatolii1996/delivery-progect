@@ -7,7 +7,8 @@ const initialState: IUserStore = {
   userInfo: {
     name: "",
     tel: "",
-    address: ""
+    address: "",
+    email: "",
   }
 };
 
@@ -39,6 +40,7 @@ const userSlice = createSlice({
      state.userInfo.name=action.payload.name;
      state.userInfo.address=action.payload.address;
      state.userInfo.tel=action.payload.tel;
+     state.userInfo.email=action.payload.email;
 
     }
 
