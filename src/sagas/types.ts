@@ -39,3 +39,15 @@ export interface IOrderAction {
   type: string;
   payload: IOrder
 }
+
+export interface IAuthResponce {
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    email: string;
+    id: string;
+    tel: string;
+    address: string;
+    name: string;
+  };
+}
