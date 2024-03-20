@@ -9,10 +9,10 @@ const LoginPage: FC = () => {
       <div className="login_header">
         <div className="logIn_button">
           <Icon
-            className="animate__animated animate__fadeInDownBig"
+            className="animate__animated animate__fadeInDownBig hat"
             icon="solar:chef-hat-outline"
-            width="150"
-            height="150"
+            // width="150"
+            // height="150"
           />
           <button className="cta">
             <span>Увійти</span>
@@ -25,17 +25,13 @@ const LoginPage: FC = () => {
         <Icon
           className="fork"
           icon="mingcute:fork-fill"
-          width="150"
-          height="150"
         />
          <h1>So.V.k.u.s.o.m</h1>
-        <Icon className="knife" icon="mdi:knife" width="150" height="150" />
+        <Icon className="knife" icon="mdi:knife" />
       </div>
       
       <div className="login_main">
-        <div className="guest_button">
-          <Link to="/f/order">Замовити в 2 кліки</Link>
-        </div>
+          <Link className="simple_order" to="/f/order">Замовити в 2 кліки</Link>
         <div className="btn-conteiner">
           <a className="btn-content" href="/register">
             <span className="btn-title">Зареєструватися</span>

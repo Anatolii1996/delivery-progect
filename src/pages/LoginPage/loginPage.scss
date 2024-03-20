@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap");
 
 .login_wrap {
   height: 100dvh;
@@ -12,6 +10,10 @@
     rgba(255, 255, 255, 1) 50%,
     rgba(128, 128, 128, 1) 100%
   );
+  .fork, .knife, .hat{
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .login_header {
@@ -21,23 +23,21 @@
   svg {
     position: relative;
     &:nth-child(1) {
-     margin-left: calc(50% - 75px);
+      margin-left: calc(50% - 75px);
     }
-    
-   
   }
 
-  h1{
+  h1 {
     text-align: center;
-    font-family: 'Protest Riot', sans-serif;
+    font-family: "Protest Riot", sans-serif;
   }
 
- .fork {
+  .fork {
     transform: rotate(-45deg);
     animation: fromLeft 0.8s linear 0.5s 1 normal forwards;
   }
 
-  .knife{
+  .knife {
     transform: rotate(225deg);
     top: -15px;
     animation: fromRight 0.8s linear 0.5s 1 normal forwards;
@@ -46,7 +46,7 @@
   .logIn_button {
     width: 100%;
     display: flex;
-    align-items: center;    
+    align-items: center;
     justify-content: space-between;
     .cta {
       position: relative;
@@ -57,7 +57,7 @@
       background: none;
       cursor: pointer;
     }
-    
+
     .cta:before {
       content: "";
       position: absolute;
@@ -70,7 +70,7 @@
       height: 45px;
       transition: all 0.3s ease;
     }
-    
+
     .cta span {
       position: relative;
       font-family: "Ubuntu", sans-serif;
@@ -79,7 +79,7 @@
       letter-spacing: 0.05em;
       color: #234567;
     }
-    
+
     .cta svg {
       position: relative;
       top: 0;
@@ -92,25 +92,24 @@
       transform: translateX(-5px);
       transition: all 0.3s ease;
     }
-    
+
     .cta:hover:before {
       width: 100%;
       background: #b1dae7;
     }
-    
+
     .cta:hover svg {
       transform: translateX(0);
     }
-    
+
     .cta:active {
       transform: scale(0.95);
     }
   }
 }
 
-
-.login_main{
-  display: flex; 
+.login_main {
+  display: flex;
   align-items: center;
   justify-content: space-around;
   .btn-conteiner {
@@ -126,7 +125,7 @@
       align-items: center;
       padding: 5px 30px;
       text-decoration: none;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       font-weight: 600;
       font-size: 1.5rem;
       color: var(--color-text);
@@ -135,8 +134,9 @@
       border-radius: 100px;
       box-shadow: 0 0 0.2em 0 var(--color-background);
     }
-    
-    .btn-content:hover, .btn-content:focus {
+
+    .btn-content:hover,
+    .btn-content:focus {
       transition: 0.5s;
       -webkit-animation: btn-content 1s;
       animation: btn-content 1s;
@@ -144,65 +144,65 @@
       outline-offset: 0.2em;
       box-shadow: 0 0 0.4em 0 var(--color-background);
     }
-    
+
     .btn-content .icon-arrow {
       transition: 0.5s;
       margin-right: 0px;
       transform: scale(0.6);
     }
-    
+
     .btn-content:hover .icon-arrow {
       transition: 0.5s;
       margin-right: 25px;
     }
-    
+
     .icon-arrow {
       width: 20px;
       margin-left: 15px;
       position: relative;
       top: 6%;
     }
-      
+
     /* SVG */
     #arrow-icon-one {
       transition: 0.4s;
       transform: translateX(-60%);
     }
-    
+
     #arrow-icon-two {
       transition: 0.5s;
       transform: translateX(-30%);
     }
-    
+
     .btn-content:hover #arrow-icon-three {
       animation: color_anim 1s infinite 0.2s;
     }
-    
+
     .btn-content:hover #arrow-icon-one {
       transform: translateX(0%);
       animation: color_anim 1s infinite 0.6s;
     }
-    
+
     .btn-content:hover #arrow-icon-two {
       transform: translateX(0%);
       animation: color_anim 1s infinite 0.4s;
     }
-    
+
     /* SVG animations */
     @keyframes color_anim {
       0% {
         fill: white;
       }
-    
+
       50% {
         fill: var(--color-background);
       }
-    
+
       100% {
         fill: white;
       }
     }
-    
+
     /* Button animations */
     @-webkit-keyframes btn-content {
       0% {
@@ -210,7 +210,7 @@
         outline-offset: 0;
       }
     }
-    
+
     @keyframes btn-content {
       0% {
         outline: 0.2em solid var(--color-background);
@@ -218,25 +218,23 @@
       }
     }
   }
-  .guest_button{
-    a {
-      display: inline-block;
-      font-size: 1.5rem;
-      padding: 0.8em 2em;
-      background-color: #000;
-      border: 3px solid yellow;
-      border-radius: 1em;
-      color: #fff;
-      font-weight: bolder;
-      transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
-      box-shadow: -5px 5px 0px 0px yellow;
-    }
-    
-    a:hover {
-      transform: translate(5px, -5px);
-    }
+  a {
+    display: inline-block;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.8em 2em;
+    background-color: #000;
+    border: 3px solid yellow;
+    border-radius: 1em;
+    color: #fff;
+    font-weight: bolder;
+    transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
+    box-shadow: -5px 5px 0px 0px yellow;
   }
- 
+
+  a:hover {
+    transform: translate(5px, -5px);
+  }
 }
 
 @keyframes fromLeft {
@@ -254,5 +252,41 @@
   }
   100% {
     left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .login_wrap{
+    .fork, .knife, .hat{
+      width: 120px;
+      height:  120px;
+     
+    }
+  }
+
+ .login_header{
+  svg:nth-child(1){
+    margin: 0;
+  }
+  .logIn_button{
+    flex-direction: column-reverse;
+   }
+ } 
+  .login_main {
+    flex-direction: column;
+    .simple_order {
+      padding: 0.8rem 1rem;
+      margin-bottom: 50px;
+    }
+   
+  }
+  .login_main > * {
+    width: 50%;
+  }
+}
+@media (max-width: 550px){
+  .login_main > * {
+    width: 90%;
   }
 }
