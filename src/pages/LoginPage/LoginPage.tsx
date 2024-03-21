@@ -1,9 +1,20 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useAppDispatch } from "../../hooks";
+import { checkUserToken } from "../../redux/userSlice";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import "./loginPage.scss";
 
 const LoginPage: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(checkUserToken())
+    }
+  }, []);
+
   return (
     <div className="login_wrap">
       <div className="login_header">
@@ -15,7 +26,11 @@ const LoginPage: FC = () => {
             // height="150"
           />
           <button className="cta">
-            <span>Увійти</span>
+            <Link to="/enter">
+              {" "}
+              <span>Увійти</span>
+            </Link>
+
             <svg width="15px" height="10px" viewBox="0 0 13 10">
               <path d="M1,5 L11,5"></path>
               <polyline points="8 1 12 5 8 9"></polyline>
@@ -29,7 +44,7 @@ const LoginPage: FC = () => {
          <h1>So.V.k.u.s.o.m</h1>
         <Icon className="knife" icon="mdi:knife" />
       </div>
-      
+
       <div className="login_main">
           <Link className="simple_order" to="/f/order">Замовити в 2 кліки</Link>
         <div className="btn-conteiner">

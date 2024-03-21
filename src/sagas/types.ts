@@ -1,8 +1,15 @@
 import { IOrder } from "../redux/types";
+import { FormValues } from "../pages/EnterPage/types";
 
 export interface IUserAction {
   type: string;
   payload: IUserState;
+}
+
+export interface ILoginAction {
+  type: string;
+  payload: FormValues;
+
 }
 
 export interface IUserState {
@@ -31,4 +38,16 @@ export interface IDalyForm {
 export interface IOrderAction {
   type: string;
   payload: IOrder
+}
+
+export interface IAuthResponce {
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    email: string;
+    id: string;
+    tel: string;
+    address: string;
+    name: string;
+  };
 }

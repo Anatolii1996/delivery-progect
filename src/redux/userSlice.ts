@@ -1,17 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserMessage, IUserState } from "./types";
+import { IUserStore, IUserState } from "./types";
+import { FormValues } from "../pages/EnterPage/types";
 
-const initialState: IUserMessage = {
+const initialState: IUserStore = {
   status: undefined,
+  userInfo: {
+    name: "",
+    tel: "",
+    address: "",
+    email: "",
+  }
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    createUser: (state, action:PayloadAction<IUserState>) => {
-      // Этот экшн вызывается из компонента для начала процесса создания пользователя
-    },
+    createUser: (state, action:PayloadAction<IUserState>) => {},
     createUserSuccess: (state, action:PayloadAction<undefined>) => {
       // Этот экшн вызывается в саге при успешной отправке данных на бекенд
       state.status = true;
@@ -23,11 +28,26 @@ const userSlice = createSlice({
     },
     removeUserStatus: (state) => {
       state.status = undefined;
-    }
+    },
+    loginUser: (state, action:PayloadAction<FormValues>) => {},
+    addUserInfo: (state, action)=>{
+     state.userInfo.name=action.payload.name;
+     state.userInfo.address=action.payload.address;
+     state.userInfo.tel=action.payload.tel;
+
+    },
+    addloginUserInfo: (state, action)=>{
+     state.userInfo.name=action.payload.name;
+     state.userInfo.address=action.payload.address;
+     state.userInfo.tel=action.payload.tel;
+     state.userInfo.email=action.payload.email;
+
+    },
+    checkUserToken: (state, action:PayloadAction<string|undefined>) => {}
 
   },
 });
 
-export const { createUser, createUserSuccess, createUserFailure, removeUserStatus } =
+export const { createUser, createUserSuccess, createUserFailure, removeUserStatus, loginUser, addUserInfo, addloginUserInfo, checkUserToken } =
   userSlice.actions;
 export default userSlice.reducer;

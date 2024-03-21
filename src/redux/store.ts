@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
-    createUser: userReducer,
+    userState: userReducer,
     menu: dishesReducer,
     dalyMenu: dalyMenuReducer,
     order: orderReducer,
