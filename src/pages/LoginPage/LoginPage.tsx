@@ -46,7 +46,7 @@ const LoginPage: FC = () => {
       </div>
 
       <div className="login_main">
-          <Link className="simple_order" to="/f/order">Замовити в 2 кліки</Link>
+          <Link className="simple_order" to="/f/h/order">Замовити в 2 кліки</Link>
         <div className="btn-conteiner">
           <a className="btn-content" href="/register">
             <span className="btn-title">Зареєструватися</span>
