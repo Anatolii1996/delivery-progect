@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FormValues, ErrorValues } from "./types";
-import { loginUser } from "../../redux/userSlice";
+import { loginUser} from "../../redux/userSlice";
 
 import { message } from "antd";
 import cn from "classnames";
@@ -14,6 +14,7 @@ const EnterPage: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userEmail = useAppSelector((state) => state.userState.userInfo.email);
+  const userName = useAppSelector((state) => state.userState.userInfo.name);
   const [formState, setFormState] = useState({
     email: "",
     password: "",
@@ -86,6 +87,8 @@ const EnterPage: FC = () => {
       password: "",
     });
   };
+
+
 
   useEffect(() => {
     // console.log(import.meta.env.VITE_SERVER_URL)

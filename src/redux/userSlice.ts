@@ -43,7 +43,7 @@ const userSlice = createSlice({
      state.userInfo.email=action.payload.email;
 
     },
-    checkUserToken: (state, action:PayloadAction<undefined>) => {}
+    checkUserToken: (state, action:PayloadAction<string|undefined>) => {}
 
   },
 });

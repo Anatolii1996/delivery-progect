@@ -24,7 +24,8 @@ function* createuserWorker(action: IUserAction): any {
     };
     const response: AxiosResponse<IAuthResponce> = yield axios(config);
     // console.log(response.data.user)
-    localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("accessToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
     yield put(addUserInfo(response.data.user));
 
     if (response.status === 201) {
@@ -59,7 +60,8 @@ function* loginUserWorker(action: ILoginAction): any {
     };
     const response: AxiosResponse<IAuthResponce> = yield axios(config);
     // console.log(response);
-    localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("accessToken", response.data.accessToken);
+    
     yield put(addloginUserInfo(response.data.user));
 
     //   if (response.status === 201) {
@@ -85,11 +87,13 @@ function* checkUserWorker(): any {
       url: `${import.meta.env.VITE_SERVER_URL}/checkToken`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("refreshToken")}`,
       },
       withCredentials: true,
+      
        // Преобразуйте данные в JSON-строку
     };
+    // console.log(config)
     const response: AxiosResponse<IAuthResponce> = yield axios(config);
     //  console.log(payload.data)
     // yield put(createDalyOrders(payload.data));
@@ -104,5 +108,5 @@ export default function* userSaga() {
 
   yield takeEvery("user/createUser", createuserWorker);
   yield takeEvery("user/loginUser", loginUserWorker);
-  // yield takeEvery("user/checkUserToken", checkUserWorker);
+  yield takeEvery("user/checkUserToken", checkUserWorker);
 }
