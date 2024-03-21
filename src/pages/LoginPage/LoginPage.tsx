@@ -11,7 +11,7 @@ const LoginPage: FC = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      dispatch(checkUserToken())
+      dispatch(checkUserToken());
     }
   }, []);
 
@@ -37,18 +37,17 @@ const LoginPage: FC = () => {
             </svg>
           </button>
         </div>
-        <Icon
-          className="fork"
-          icon="mingcute:fork-fill"
-        />
-         <h1>So.V.k.u.s.o.m</h1>
+        <Icon className="fork" icon="mingcute:fork-fill" />
+        <h1>So.V.k.u.s.o.m</h1>
         <Icon className="knife" icon="mdi:knife" />
       </div>
 
       <div className="login_main">
-          <Link className="simple_order" to="/f/h/order">Замовити в 2 кліки</Link>
+        <Link className="simple_order" to="/f/h/order">
+          Замовити в 2 кліки
+        </Link>
         <div className="btn-conteiner">
-          <a className="btn-content" href="/register">
+          <Link className="btn-content" to="/register">
             <span className="btn-title">Зареєструватися</span>
             <span className="icon-arrow">
               <svg
@@ -84,7 +83,7 @@ const LoginPage: FC = () => {
                 </g>
               </svg>
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
