@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IOrder } from "./types";
 

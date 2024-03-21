@@ -4,7 +4,7 @@ import userSaga from "./userSaga";
 import dishesSaga from "./dishesSaga";
 import menuSaga from "./menuSaga ";
 import orderSaga from "./orderSaga";
-import dalyOrdersSaga from "./DalyOrdersSaga";
+import dalyOrdersSaga from "./dalyOrdersSaga";
 
 
 const sagasList = [userSaga, dishesSaga, menuSaga, orderSaga, dalyOrdersSaga];

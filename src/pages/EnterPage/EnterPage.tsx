@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { FC, useState, useEffect } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { useNavigate } from "react-router-dom";

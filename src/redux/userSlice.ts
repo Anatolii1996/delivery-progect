@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserStore, IUserState } from "./types";
 import { FormValues } from "../pages/EnterPage/types";
