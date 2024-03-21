@@ -11,11 +11,11 @@ import cn from "classnames";
 import "./enter.scss";
 
 const EnterPage: FC = () => {
-  const [messageApi, contextHolder] = message.useMessage();
+  const [ ,contextHolder] = message.useMessage();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userEmail = useAppSelector((state) => state.userState.userInfo.email);
-  const userName = useAppSelector((state) => state.userState.userInfo.name);
+  // const userName = useAppSelector((state) => state.userState.userInfo.name);
   const [formState, setFormState] = useState({
     email: "",
     password: "",

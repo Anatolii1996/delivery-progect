@@ -96,7 +96,7 @@ function* checkUserWorker(): any {
     };
     // console.log(config)
     const response: AxiosResponse<IAuthResponce> = yield axios(config);
-    //  console.log(payload.data)
+     console.log(response)
     // yield put(createDalyOrders(payload.data));
   } catch (error) {
     console.log(error);
