@@ -11,8 +11,8 @@ const Spinner = () => {
     >
       <defs>
         <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#000"></stop>
-          <stop offset="100%" stop-color="#fff"></stop>
+          <stop offset="0%" stopColor="#000"></stop>
+          <stop offset="100%" stopColor="#fff"></stop>
         </linearGradient>
         <mask id="mask1">
           <rect x="0" y="0" width="160" height="160" fill="url(#grad)"></rect>
@@ -31,10 +31,10 @@ const Spinner = () => {
             r="72"
             fill="none"
             stroke="hsl(223,90%,55%)"
-            stroke-width="16"
-            stroke-dasharray="452.39 452.39"
-            stroke-dashoffset="452"
-            stroke-linecap="round"
+            strokeWidth="16"
+            strokeDasharray="452.39 452.39"
+            strokeDashoffset="452"
+            strokeLinecap="round"
             transform="rotate(-45,80,80)"
           ></circle>
         </g>
@@ -48,10 +48,10 @@ const Spinner = () => {
             r="72"
             fill="none"
             stroke="hsl(193,90%,55%)"
-            stroke-width="16"
-            stroke-dasharray="452.39 452.39"
-            stroke-dashoffset="452"
-            stroke-linecap="round"
+            strokeWidth="16"
+            strokeDasharray="452.39 452.39"
+            strokeDashoffset="452"
+            strokeLinecap="round"
             transform="rotate(-45,80,80)"
           ></circle>
         </g>
@@ -59,10 +59,10 @@ const Spinner = () => {
 
       <g>
         <g
-          stroke-width="4"
-          stroke-dasharray="12 12"
-          stroke-dashoffset="12"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeDasharray="12 12"
+          strokeDashoffset="12"
+          strokeLinecap="round"
           transform="translate(80,80)"
         >
           <polyline
@@ -117,10 +117,10 @@ const Spinner = () => {
       </g>
       <g mask="url(#mask1)">
         <g
-          stroke-width="4"
-          stroke-dasharray="12 12"
-          stroke-dashoffset="12"
-          stroke-linecap="round"
+          strokeWidth="4"
+          strokeDasharray="12 12"
+          strokeDashoffset="12"
+          strokeLinecap="round"
           transform="translate(80,80)"
         >
           <polyline

@@ -45,8 +45,6 @@ const userSlice = createSlice({
      state.userInfo.address=action.payload.address;
      state.userInfo.tel=action.payload.tel;
      
-
-
     },
     addloginUserInfo: (state, action)=>{
      state.userInfo.name=action.payload.name;

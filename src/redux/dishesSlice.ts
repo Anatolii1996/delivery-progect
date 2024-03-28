@@ -37,7 +37,7 @@ const dishesSlice = createSlice({
   },
 });
 
-export const GET_DISHES = "dishesSlice/getDishes";
+const GET_DISHES = "dishesSlice/getDishes";
 export const getDishes = createAction(GET_DISHES, () => ({
   payload: undefined,
 }));

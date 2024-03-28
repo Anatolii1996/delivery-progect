@@ -4,7 +4,7 @@ import { orderSuccess } from "../redux/orderSlice";
 import axios from "axios";
 
 function* setOrderWorker(action: IOrderAction): any {
-  // console.log("setOrderWorker started");
+  console.log("setOrderWorker started");
   // console.log(action.payload)
   try {
     const config = {
